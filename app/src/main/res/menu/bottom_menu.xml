@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/historyFragment"
+        android:title="@string/history"
+        android:icon="@drawable/ic_history">
+    </item>
+    <item
+        android:id="@+id/homeFragment"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home">
+    </item>
+    <item
+        android:id="@+id/currencyFragment"
+        android:title="@string/currency_exchange"
+        android:icon="@drawable/ic_currency">
+    </item>
+</menu>

@@ -1,0 +1,37 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.MyMoney" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purpleLight</item>
+        <item name="colorPrimaryVariant">@color/purple_500</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="bottomNavigationStyle">@style/CustomBottomNavigationViewStyle</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.MyMoney.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="CustomBottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+<!--        <item name="backgroundTint">@color/bottomNavBackground</item>-->
+        <item name="itemIconTint">@color/bottom_nav_view_item_color</item>
+        <item name="itemTextColor">@color/bottom_nav_view_item_color</item>
+        <item name="titleMargin">4dp</item>
+    </style>
+
+    <style name="CustomChipStyle" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_background_color</item>
+        <item name="android:textColor">@color/chip_text_color</item>
+        <item name="checkedIconTint">@color/chip_text_color</item>
+    </style>
+
+<!--    <style name="Theme.MyMoney.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />-->
+
+    <style name="Theme.MyMoney.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="gray">#37474f</color>
+    <color name="lightGray">#62727b</color>
+    <color name="light">#A1ABB1</color>
+    <color name="dark">#102027</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="purpleLight">#f1f4ff</color>
+    <color name="purpleMedium">#bec1cc</color>
+    <color name="purpleDark">#b0b0e5</color>
+    <color name="darkPurple">#6969BF</color>
+    <color name="purple_500">#8081b3</color>
+    <color name="purple_700">#206200EA</color>
+
+    <!-- Day theme  -->
+
+    <color name="background">@color/purpleLight</color>
+    <color name="bottomNavCheckedItemColor">@color/darkPurple</color>
+    <color name="bottomNavItemColor">@color/light</color>
+
+    <color name="checkedChipTextColor">@color/darkPurple</color>
+    <color name="chipTextColor">@color/lightGray</color>
+    <color name="checkedChipBackgroundColor">@color/purple_700</color>
+    <color name="chipBackgroundColor">@color/purpleLight</color>
+
+    <color name="buttonBackgroundColor">@color/purpleLight</color>
+
+</resources>

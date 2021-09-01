@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="gray">#37474f</color>
+    <color name="lightGray">#62727b</color>
+    <color name="dark">#102027</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="purpleLight">#f1f4ff</color>
+    <color name="purpleDark">#bec1cc</color>
+
+<!--    Night theme-->
+    <color name="background">@color/gray</color>
+
+
+</resources>
