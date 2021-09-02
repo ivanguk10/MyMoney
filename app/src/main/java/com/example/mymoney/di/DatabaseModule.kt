@@ -2,8 +2,7 @@ package com.example.mymoney.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.example.mymoney.MoneyDatabase
+import com.example.mymoney.database.MoneyDatabase
 import com.example.mymoney.util.Constants.Companion.DATABASE_NAME
 import dagger.Module
 import dagger.Provides

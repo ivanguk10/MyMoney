@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/splashFragment">
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.mymoney.ui.home.HomeFragment"
@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_homeFragment_to_bottomSheetFragment"
             app:destination="@id/bottomSheetFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_bottomSheetIncomeFragment"
+            app:destination="@id/bottomSheetIncomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -46,4 +49,39 @@
             android:id="@+id/action_bottomSheetFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </dialog>
+    <dialog
+        android:id="@+id/bottomSheetIncomeFragment"
+        android:name="com.example.mymoney.ui.home.BottomSheetIncomeFragment"
+        android:label="fragment_bottom_sheet_income"
+        tools:layout="@layout/fragment_bottom_sheet_income" >
+        <action
+            android:id="@+id/action_bottomSheetIncomeFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.mymoney.ui.screens.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewPagerFragment"
+        android:name="com.example.mymoney.ui.screens.onboarding.ViewPagerFragment"
+        android:label="ViewPagerFragment" >
+        <action
+            android:id="@+id/action_viewPagerFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/viewPagerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

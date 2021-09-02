@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.mymoney.R
 import com.example.mymoney.databinding.FragmentHomeBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class HomeFragment : Fragment() {
@@ -23,7 +24,14 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNavigationView?.visibility = View.VISIBLE
+
         binding.addMoneyFab.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_bottomSheetIncomeFragment)
+        }
+
+        binding.subtractMoneyFab.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_bottomSheetFragment)
         }
 

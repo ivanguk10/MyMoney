@@ -19,4 +19,6 @@
     <string name="sport">Sport</string>
     <string name="supermarket">Supermarket</string>
     <string name="clothes">Clothes</string>
+    <string name="my_money">My Money</string>
+    <string name="done">Done</string>
 </resources>
