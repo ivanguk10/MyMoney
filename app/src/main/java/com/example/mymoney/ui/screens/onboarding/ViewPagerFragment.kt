@@ -10,8 +10,9 @@ import com.example.mymoney.databinding.FragmentSecondScreenBinding
 import com.example.mymoney.databinding.FragmentViewPagerBinding
 import com.example.mymoney.ui.screens.FirstScreen
 import com.example.mymoney.ui.screens.SecondScreen
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ViewPagerFragment : Fragment() {
 
     private var _binding: FragmentViewPagerBinding? = null

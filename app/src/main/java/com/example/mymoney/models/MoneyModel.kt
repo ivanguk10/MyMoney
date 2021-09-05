@@ -5,10 +5,10 @@ import kotlinx.parcelize.RawValue
 
 data class MoneyModel(
     //@SerializedName("incomes")
-    var incomes: @RawValue List<IncomeModel>,
+    var incomes: @RawValue ArrayList<IncomeModel>,
 
     //@SerializedName("expenses")
-    var expenses: @RawValue List<ExpenseModel>
+    var expenses: @RawValue ArrayList<ExpenseModel>
 ) {
 
 }

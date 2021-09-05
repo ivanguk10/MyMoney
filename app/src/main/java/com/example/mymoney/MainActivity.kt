@@ -8,7 +8,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.mymoney.R
 import com.example.mymoney.databinding.ActivityMainBinding
 import com.example.mymoney.ui.home.HomeFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
