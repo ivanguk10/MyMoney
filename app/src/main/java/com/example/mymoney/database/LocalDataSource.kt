@@ -20,7 +20,7 @@ class LocalDataSource @Inject constructor(
         moneyDao.updateMoneyEntity(moneyEntity)
     }
 
-    suspend fun getMoneyEntity(id: Int): MoneyEntity {
+    fun getMoneyEntity(id: Int): LiveData<MoneyEntity> {
         return moneyDao.getMoneyEntity(id)
     }
 }

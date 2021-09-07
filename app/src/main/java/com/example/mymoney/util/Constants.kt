@@ -12,5 +12,6 @@ class Constants {
         const val PREFERENCES_TYPE_ID = "preferencesTypeId"
 
         const val DEFAULT_TYPE = "Supermarket"
+        const val MONEY_BUNDLE = "moneyBundle"
     }
 }

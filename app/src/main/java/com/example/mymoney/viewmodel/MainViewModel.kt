@@ -21,7 +21,10 @@ class MainViewModel @Inject constructor(
     application: Application
 ): AndroidViewModel(application) {
 
+    private lateinit var moneyEntity: MoneyEntity
+
     val readMoney: LiveData<List<MoneyEntity>> = repository.local.readMoney()
+    val readEntity: LiveData<MoneyEntity> = repository.local.getMoneyEntity(1)
 
     val readExpenseType = dataStoreRepository.readExpenseType
 
@@ -40,6 +43,8 @@ class MainViewModel @Inject constructor(
     fun saveExpenseTypeTemp(expenseType: String, expenseTypeId: Int) {
         ExpenseType(expenseType, expenseTypeId)
     }
+
+
 
 
 }

@@ -21,5 +21,5 @@ interface MoneyDao {
     fun readMoneyEntities(): LiveData<List<MoneyEntity>>
 
     @Query("SELECT * from money_table WHERE id = :id")
-    suspend fun getMoneyEntity(id: Int): MoneyEntity
+    fun getMoneyEntity(id: Int): LiveData<MoneyEntity>
 }

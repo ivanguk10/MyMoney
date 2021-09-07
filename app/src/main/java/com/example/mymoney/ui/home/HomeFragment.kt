@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.mymoney.R
 import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentHomeBinding
+import com.example.mymoney.util.Constants.Companion.MONEY_BUNDLE
 import com.example.mymoney.viewmodel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +23,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val mainViewModel: MainViewModel by viewModels()
+    private var moneyEntity: MoneyEntity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +38,17 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
+        val moneyBundle = Bundle()
+        //val fragmentTransaction = fragmentManager?.beginTransaction();
         mainViewModel.readMoney.observe(viewLifecycleOwner, { money ->
             binding.moneyCountTextView.text = money.first().value.toString()
+
+
+            if (money != null) {
+                moneyBundle.putString(MONEY_BUNDLE, money.first().money.toString())
+                arguments = moneyBundle
+            }
+
         })
 
         binding.addMoneyFab.setOnClickListener {
@@ -47,6 +58,9 @@ class HomeFragment : Fragment() {
         binding.subtractMoneyFab.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_bottomSheetFragment)
         }
+
+
+
 
         return binding.root
     }
