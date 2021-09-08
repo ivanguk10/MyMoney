@@ -10,6 +10,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="bottomNavigationStyle">@style/CustomBottomNavigationViewStyle</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -29,6 +30,16 @@
         <item name="chipBackgroundColor">@color/chip_background_color</item>
         <item name="android:textColor">@color/chip_text_color</item>
         <item name="checkedIconTint">@color/chip_text_color</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_dialogs</item>
     </style>
 
 <!--    <style name="Theme.MyMoney.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />-->
