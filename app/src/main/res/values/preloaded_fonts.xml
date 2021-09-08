@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/acme</item>
+        <item>@font/belgrano</item>
+        <item>@font/courgette</item>
+        <item>@font/domine</item>
+        <item>@font/mclaren</item>
+        <item>@font/noto_sans</item>
+    </array>
+</resources>

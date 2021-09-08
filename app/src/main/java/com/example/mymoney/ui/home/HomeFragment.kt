@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
+import com.example.mymoney.CardAdapter
 import com.example.mymoney.R
 import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentHomeBinding
@@ -23,6 +26,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val mainViewModel: MainViewModel by viewModels()
+    private val cardAdapter: CardAdapter by lazy { CardAdapter() }
     private var moneyEntity: MoneyEntity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,17 +42,11 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val moneyBundle = Bundle()
-        //val fragmentTransaction = fragmentManager?.beginTransaction();
+        setUpRecyclerView()
+
         mainViewModel.readMoney.observe(viewLifecycleOwner, { money ->
-            binding.moneyCountTextView.text = money.first().value.toString()
 
-
-            if (money != null) {
-                moneyBundle.putString(MONEY_BUNDLE, money.first().money.toString())
-                arguments = moneyBundle
-            }
-
+            cardAdapter.setData(money)
         })
 
         binding.addMoneyFab.setOnClickListener {
@@ -63,6 +61,14 @@ class HomeFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    private fun setUpRecyclerView() {
+        binding.homeRecyclerView.adapter = cardAdapter
+        binding.homeRecyclerView.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL,
+            false)
     }
 
     override fun onDestroyView() {

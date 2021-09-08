@@ -72,7 +72,6 @@ class BottomSheetIncomeFragment : BottomSheetDialogFragment() {
         })
 
         mainViewModel.readMoney.observe(viewLifecycleOwner, { money ->
-            binding.textView.text = money.first().toString()
             moneyEntity = money.first()
         })
 

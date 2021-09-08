@@ -14,7 +14,6 @@ import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentBottomSheetBinding
 import com.example.mymoney.models.ExpenseModel
 import com.example.mymoney.models.MoneyModel
-import com.example.mymoney.util.Constants
 import com.example.mymoney.util.Constants.Companion.DEFAULT_TYPE
 import com.example.mymoney.viewmodel.KeyboardViewModel
 import com.example.mymoney.viewmodel.MainViewModel
@@ -22,6 +21,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class BottomSheetFragment : BottomSheetDialogFragment() {
@@ -105,7 +106,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         val newExpense = binding.valueTextView.text.toString().toFloat()
         val newExpenseModel = ExpenseModel(
            newExpense,
-           expenseType
+           expenseType,
+           getDate()
         )
         expenseList.add(newExpenseModel)
 
@@ -122,6 +124,15 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             moneyModel
         ))
         findNavController().navigate(R.id.action_bottomSheetFragment_to_homeFragment)
+    }
+
+    private fun getDate(): String {
+
+        //Be careful in the future with date format
+        val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm")
+
+        return dateFormat.format(calendar.time)
     }
 
 

@@ -21,4 +21,12 @@
     <string name="clothes">Clothes</string>
     <string name="my_money">My Money</string>
     <string name="done">Done</string>
+    <string name="transport">Transport</string>
+    <string name="eat_outside">Eat Outside</string>
+    <string name="car">Car</string>
+    <string name="taxi">Taxi</string>
+    <string name="communal_payments">Communal payments</string>
+    <string name="smoking">Smoking</string>
+    <string name="subscription">Subscription</string>
+    <string name="presents">Presents</string>
 </resources>

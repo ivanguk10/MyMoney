@@ -12,84 +12,40 @@
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeFragment">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/moneyCard"
-            android:layout_width="match_parent"
-            android:layout_height="260dp"
-            android:layout_margin="16dp"
-            android:backgroundTint="@color/purpleDark"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homeRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:maxImageSize="40dp"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/homeRecyclerView"
+            app:layout_constraintEnd_toEndOf="@+id/homeRecyclerView" />
 
-                <TextView
-                    android:id="@+id/moneyTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/money"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/moneyTextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="6dp"
-                        android:text="BYN"
-                        android:textColor="@color/white"
-                        android:textSize="20sp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/moneyCountTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text=""
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="210dp"
-                    android:layout_height="210dp"
-                    android:src="@drawable/ic_wallet"
-                    app:tint="@color/purpleLight"
-                    android:alpha="0.15"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/newCard"-->
+<!--            android:layout_width="70dp"-->
+<!--            android:layout_height="70dp"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:text="New"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="15sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:cornerRadius="35dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/homeRecyclerView"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/homeRecyclerView"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/homeRecyclerView" />-->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addMoneyFab"
@@ -97,12 +53,12 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
-            android:src="@drawable/ic_add"
-            app:maxImageSize="40dp"
             android:backgroundTint="@color/white"
-            app:tint="@color/black"
+            android:src="@drawable/ic_add"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:maxImageSize="40dp"
+            app:tint="@color/black" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/subtractMoneyFab"
@@ -110,12 +66,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginBottom="24dp"
-            android:src="@drawable/ic_subtract"
-            app:maxImageSize="40dp"
             android:backgroundTint="@color/white"
-            app:tint="@color/black"
+            android:src="@drawable/ic_subtract"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:maxImageSize="40dp"
+            app:tint="@color/black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

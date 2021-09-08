@@ -48,16 +48,6 @@ class HistoryFragment : Fragment() {
 
         setUpRecyclerView()
 
-
-
-
-
-
-
-
-
-
-
         return binding.root
     }
 

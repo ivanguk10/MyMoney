@@ -25,7 +25,7 @@ class MoneyAdapter: RecyclerView.Adapter<MoneyAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding.expenseType.text = expenses[position].type
         holder.binding.expenseAmount.text = expenses[position].amount.toString()
-
+        holder.binding.dateTime.text = expenses[position].date
 
     }
 
