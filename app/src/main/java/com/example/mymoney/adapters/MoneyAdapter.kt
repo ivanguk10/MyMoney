@@ -1,8 +1,7 @@
-package com.example.mymoney
+package com.example.mymoney.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymoney.databinding.ExpenseRowLayoutBinding
 import com.example.mymoney.models.ExpenseModel

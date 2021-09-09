@@ -3,6 +3,8 @@
 
     <color name="gray">#37474f</color>
     <color name="lightGray">#62727b</color>
+    <color name="lightestGray">#F9F9F9</color>
+    <color name="lightMediumGray">#80D1D1D1</color>
     <color name="light">#A1ABB1</color>
     <color name="dark">#102027</color>
     <color name="black">#FF000000</color>
@@ -16,6 +18,7 @@
 
     <!-- Day theme  -->
 
+    <color name="backgroundColor">@color/lightestGray</color>
     <color name="background">@color/purpleLight</color>
     <color name="bottomNavCheckedItemColor">@color/darkPurple</color>
     <color name="bottomNavItemColor">@color/light</color>

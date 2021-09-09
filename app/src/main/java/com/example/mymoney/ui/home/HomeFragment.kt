@@ -6,15 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
-import com.example.mymoney.CardAdapter
+import com.example.mymoney.adapters.CardAdapter
 import com.example.mymoney.R
 import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentHomeBinding
-import com.example.mymoney.util.Constants.Companion.MONEY_BUNDLE
 import com.example.mymoney.viewmodel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,6 +52,10 @@ class HomeFragment : Fragment() {
 
         binding.subtractMoneyFab.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_bottomSheetFragment)
+        }
+
+        binding.addNewCardBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_addNewCardFragment)
         }
 
 

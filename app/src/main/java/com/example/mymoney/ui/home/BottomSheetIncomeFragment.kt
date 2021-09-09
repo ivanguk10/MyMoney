@@ -93,6 +93,7 @@ class BottomSheetIncomeFragment : BottomSheetDialogFragment() {
         )
         mainViewModel.updateMoneyEntity(MoneyEntity(
             1,
+            "Money",
             moneyAmount,
             moneyModel
         ))

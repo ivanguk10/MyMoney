@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_homeFragment_to_bottomSheetIncomeFragment"
             app:destination="@id/bottomSheetIncomeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addNewCardFragment"
+            app:destination="@id/addNewCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -90,4 +93,13 @@
             app:popUpTo="@id/viewPagerFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <dialog
+        android:id="@+id/addNewCardFragment"
+        android:name="com.example.mymoney.ui.home.AddNewCardFragment"
+        android:label="fragment_add_new_card"
+        tools:layout="@layout/fragment_add_new_card" >
+        <action
+            android:id="@+id/action_addNewCardFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </dialog>
 </navigation>

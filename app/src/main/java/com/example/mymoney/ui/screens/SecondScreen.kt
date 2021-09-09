@@ -59,6 +59,7 @@ class SecondScreen : Fragment() {
     private fun addFirstMoneyEntity() {
         val money = MoneyEntity(
             0,
+            name = "Money",
             0f,
             money = MoneyModel(arrayListOf<IncomeModel>(), arrayListOf<ExpenseModel>())
         )

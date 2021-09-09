@@ -1,4 +1,4 @@
-package com.example.mymoney
+package com.example.mymoney.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -19,6 +19,7 @@ class CardAdapter: RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
+        holder.binding.moneyName.text = cards[position].name
         holder.binding.moneyCountTextView.text = cards[position].value.toString()
     }
 

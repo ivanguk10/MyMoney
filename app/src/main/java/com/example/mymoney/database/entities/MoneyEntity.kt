@@ -14,6 +14,7 @@ data class MoneyEntity(
 
     @PrimaryKey(autoGenerate = true)
     var id: Int,
+    var name: String = "",
     var value: Float = 0f,
     var money: @RawValue MoneyModel
 ): Parcelable {
