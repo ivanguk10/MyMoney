@@ -1,5 +1,6 @@
 package com.example.mymoney.database.entities
 
+import android.graphics.Color
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -16,6 +17,7 @@ data class MoneyEntity(
     var id: Int,
     var name: String = "",
     var value: Float = 0f,
-    var money: @RawValue MoneyModel
+    var money: @RawValue MoneyModel,
+    var color: Int = 0
 ): Parcelable {
 }

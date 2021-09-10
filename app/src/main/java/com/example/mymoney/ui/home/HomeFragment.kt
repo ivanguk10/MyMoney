@@ -23,7 +23,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val mainViewModel: MainViewModel by viewModels()
-    private val cardAdapter: CardAdapter by lazy { CardAdapter() }
+    private val cardAdapter: CardAdapter by lazy { CardAdapter(requireActivity()) }
     private var moneyEntity: MoneyEntity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

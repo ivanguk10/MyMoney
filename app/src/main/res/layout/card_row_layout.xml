@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="260dp"
             android:layout_margin="16dp"
-            android:backgroundTint="@color/purpleDark"
+            app:cardBackgroundColor="@color/black"
             app:cardCornerRadius="16dp"
             app:cardElevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"

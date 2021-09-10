@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -30,6 +32,8 @@ class AddNewCardFragment : DialogFragment() {
     private val binding get() = _binding!!
     private lateinit var mainViewModel: MainViewModel
 
+    private var cardColor = R.color.purpleDark
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,6 +53,49 @@ class AddNewCardFragment : DialogFragment() {
             findNavController().navigate(R.id.action_addNewCardFragment_to_homeFragment)
         }
 
+        binding.goldButton.setOnClickListener {
+            binding.moneyCard.setCardBackgroundColor(
+                ContextCompat.getColor(requireContext(),
+                    R.color.gold)
+            )
+            cardColor = R.color.gold
+        }
+        binding.purpleButton.setOnClickListener {
+            binding.moneyCard.setCardBackgroundColor(
+                ContextCompat.getColor(requireContext(),
+                    R.color.purpleDark)
+            )
+            cardColor = R.color.purpleDark
+        }
+        binding.silverButton.setOnClickListener {
+            binding.moneyCard.setCardBackgroundColor(
+                ContextCompat.getColor(requireContext(),
+                    R.color.silver)
+            )
+            cardColor = R.color.silver
+        }
+        binding.blueButton.setOnClickListener {
+            binding.moneyCard.setCardBackgroundColor(
+                ContextCompat.getColor(requireContext(),
+                    R.color.pastelBlue)
+            )
+            cardColor = R.color.pastelBlue
+        }
+        binding.orangeButton.setOnClickListener {
+            binding.moneyCard.setCardBackgroundColor(
+                ContextCompat.getColor(requireContext(),
+                    R.color.pastel)
+            )
+            cardColor = R.color.pastel
+        }
+        binding.greenButton.setOnClickListener {
+            binding.moneyCard.setCardBackgroundColor(
+                ContextCompat.getColor(requireContext(),
+                    R.color.pastelGreen)
+            )
+            cardColor = R.color.pastelGreen
+        }
+
         return binding.root
     }
 
@@ -61,7 +108,8 @@ class AddNewCardFragment : DialogFragment() {
             money = MoneyModel(
                 arrayListOf<IncomeModel>(),
                 arrayListOf<ExpenseModel>()
-            )
+            ),
+            cardColor
         )
         mainViewModel.insertMoneyEntity(moneyEntity)
     }

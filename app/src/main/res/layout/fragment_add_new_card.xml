@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="260dp"
             android:layout_margin="16dp"
-            android:backgroundTint="@color/purpleDark"
+            app:cardBackgroundColor="@color/purpleDark"
             app:cardCornerRadius="16dp"
             app:cardElevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -60,6 +60,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:maxLength="16"
+                    android:textCursorDrawable="@null"
                     android:background="@android:color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:hint="0.0"
-                        android:inputType="number"
+                        android:inputType="numberDecimal"
                         android:background="@android:color/transparent"
                         android:textAlignment="center"
                         android:textColor="@color/white"
@@ -117,14 +118,79 @@
             android:id="@+id/insertNewCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="Add"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/purpleButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/purpleDark"
+            app:backgroundTint="@color/purpleDark"
+            app:layout_constraintStart_toStartOf="@+id/moneyCard"
             app:layout_constraintTop_toBottomOf="@+id/moneyCard" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/goldButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/gold"
+            app:backgroundTint="@color/gold"
+            app:layout_constraintStart_toEndOf="@+id/purpleButton"
+            app:layout_constraintTop_toBottomOf="@+id/moneyCard" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/silverButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/silver"
+            app:backgroundTint="@color/silver"
+            app:layout_constraintStart_toEndOf="@+id/goldButton"
+            app:layout_constraintTop_toBottomOf="@+id/moneyCard" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/blueButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/pastelBlue"
+            app:backgroundTint="@color/pastelBlue"
+            app:layout_constraintStart_toEndOf="@+id/silverButton"
+            app:layout_constraintTop_toBottomOf="@+id/moneyCard" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/orangeButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/pastel"
+            app:backgroundTint="@color/pastel"
+            app:layout_constraintStart_toEndOf="@+id/blueButton"
+            app:layout_constraintTop_toBottomOf="@+id/moneyCard" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/greenButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/pastelGreen"
+            app:backgroundTint="@color/pastelGreen"
+            app:layout_constraintEnd_toEndOf="@+id/moneyCard"
+            app:layout_constraintStart_toEndOf="@+id/orangeButton"
+            app:layout_constraintTop_toBottomOf="@+id/moneyCard" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

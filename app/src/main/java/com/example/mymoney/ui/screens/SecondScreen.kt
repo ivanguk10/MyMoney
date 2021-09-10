@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.mymoney.R
@@ -23,6 +24,8 @@ class SecondScreen : Fragment() {
 
     private var _binding: FragmentSecondScreenBinding? = null
     private val binding get() = _binding!!
+
+    val color = R.color.purpleDark
 
     private val mainViewModel: MainViewModel by viewModels()
 
@@ -42,8 +45,9 @@ class SecondScreen : Fragment() {
         binding.doneTextView.setOnClickListener {
             findNavController().navigate(R.id.action_viewPagerFragment_to_homeFragment)
             onBoardingFinished()
-
         }
+
+        Toast.makeText(requireContext(), color.toString(), Toast.LENGTH_SHORT).show()
 
 
         return binding.root
@@ -61,7 +65,8 @@ class SecondScreen : Fragment() {
             0,
             name = "Money",
             0f,
-            money = MoneyModel(arrayListOf<IncomeModel>(), arrayListOf<ExpenseModel>())
+            money = MoneyModel(arrayListOf<IncomeModel>(), arrayListOf<ExpenseModel>()),
+            R.color.purpleDark
         )
         mainViewModel.insertMoneyEntity(money)
     }
