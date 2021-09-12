@@ -1,6 +1,7 @@
 package com.example.mymoney.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -8,6 +9,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.mymoney.R
 import com.example.mymoney.databinding.ActivityMainBinding
 import com.example.mymoney.ui.home.HomeFragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

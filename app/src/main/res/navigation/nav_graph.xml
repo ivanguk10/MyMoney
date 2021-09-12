@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_bottomSheetFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="moneyEntity"
+            app:argType="com.example.mymoney.database.entities.MoneyEntity" />
     </dialog>
     <dialog
         android:id="@+id/bottomSheetIncomeFragment"

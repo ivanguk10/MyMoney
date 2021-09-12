@@ -33,6 +33,8 @@ class BottomSheetIncomeFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentBottomSheetIncomeBinding? = null
     private val binding get() = _binding!!
 
+    private val args: BottomSheetIncomeFragmentArgs by navArgs()
+
     private val keyboardViewModel: KeyboardViewModel by viewModels()
     private lateinit var mainViewModel: MainViewModel
 
@@ -74,6 +76,8 @@ class BottomSheetIncomeFragment : BottomSheetDialogFragment() {
         mainViewModel.readMoney.observe(viewLifecycleOwner, { money ->
             moneyEntity = money.first()
         })
+
+        Toast.makeText(requireContext(), args.moneyEntity.toString(), Toast.LENGTH_LONG).show()
 
         return binding.root
     }

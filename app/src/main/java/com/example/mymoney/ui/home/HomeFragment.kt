@@ -46,18 +46,17 @@ class HomeFragment : Fragment() {
             cardAdapter.setData(money)
         })
 
-        binding.addMoneyFab.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_bottomSheetIncomeFragment)
-        }
-
-        binding.subtractMoneyFab.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_bottomSheetFragment)
-        }
+//        binding.addMoneyFab.setOnClickListener {
+//            findNavController().navigate(R.id.action_homeFragment_to_bottomSheetIncomeFragment)
+//        }
+//
+//        binding.subtractMoneyFab.setOnClickListener {
+//            findNavController().navigate(R.id.action_homeFragment_to_bottomSheetFragment)
+//        }
 
         binding.addNewCardBtn.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_addNewCardFragment)
         }
-
 
 
 

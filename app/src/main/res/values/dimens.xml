@@ -1,3 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="design_bottom_navigation_height" tools:override="true">60dp</dimen>
+    <dimen name="strokeWidthChecked">2dp</dimen>
+    <dimen name="strokeWidth">0dp</dimen>
 </resources>
