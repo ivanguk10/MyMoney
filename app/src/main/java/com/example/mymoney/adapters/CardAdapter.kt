@@ -12,6 +12,10 @@ import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.CardRowLayoutBinding
 import com.example.mymoney.ui.home.HomeFragmentDirections
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class CardAdapter(
     private val requireActivity: FragmentActivity
@@ -104,12 +108,24 @@ class CardAdapter(
         val expenseBtn = requireActivity.findViewById<FloatingActionButton>(R.id.subtractMoneyFab)
         val incomeBtn = requireActivity.findViewById<FloatingActionButton>(R.id.addMoneyFab)
         if (show) {
+            expenseBtn?.isEnabled = true
+            incomeBtn?.isEnabled = true
             expenseBtn.visibility = View.VISIBLE
             incomeBtn.visibility = View.VISIBLE
+            expenseBtn?.animate()?.alpha(1f)?.duration = 700
+            incomeBtn?.animate()?.alpha(1f)?.duration = 700
         }
         else {
-            expenseBtn?.visibility = View.INVISIBLE
-            incomeBtn?.visibility = View.INVISIBLE
+            expenseBtn?.animate()?.alpha(0f)?.duration = 700
+            incomeBtn?.animate()?.alpha(0f)?.duration = 700
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(1000)
+                expenseBtn?.isEnabled = false
+                incomeBtn?.isEnabled = false
+                expenseBtn?.visibility = View.INVISIBLE
+                incomeBtn?.visibility = View.INVISIBLE
+            }
+
         }
     }
 
@@ -148,6 +164,10 @@ class CardAdapter(
         }
         showBtns(false)
         cardViewHolders.clear()
+    }
+
+    private fun applyStatusBarColor(color: Int) {
+        requireActivity.window.statusBarColor = ContextCompat.getColor(requireActivity, color)
     }
 
     fun clearActionMode() {

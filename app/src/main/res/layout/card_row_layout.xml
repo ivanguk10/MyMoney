@@ -16,7 +16,7 @@
             android:layout_height="260dp"
             android:layout_margin="16dp"
             app:cardBackgroundColor="@color/purpleDark"
-            app:strokeColor="@color/black"
+            app:strokeColor="@color/red"
             app:cardCornerRadius="16dp"
             app:cardElevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"

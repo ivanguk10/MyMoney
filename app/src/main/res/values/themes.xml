@@ -12,6 +12,7 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="bottomNavigationStyle">@style/CustomBottomNavigationViewStyle</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="actionModeStyle">@style/ActionMode</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -41,6 +42,11 @@
     <style name="AppModalStyle"
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/rounded_dialogs</item>
+    </style>
+
+    <style name="ActionMode" parent="Base.Widget.AppCompat.ActionMode">
+        <item name="background">@color/white</item>
+        <item name="backgroundSplit">@color/white</item>
     </style>
 
 <!--    <style name="Theme.MyMoney.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />-->
