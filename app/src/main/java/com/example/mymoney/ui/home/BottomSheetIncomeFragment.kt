@@ -38,10 +38,8 @@ class BottomSheetIncomeFragment : BottomSheetDialogFragment() {
     private val keyboardViewModel: KeyboardViewModel by viewModels()
     private lateinit var mainViewModel: MainViewModel
 
-    private lateinit var moneyEntity: MoneyEntity
     private lateinit var incomeList: ArrayList<IncomeModel>
     private var moneyAmount = 0f
-    //private val args: BottomSheetIncomeFragmentArgs by navArgs()
 
 
     override fun onCreateView(
@@ -72,17 +70,11 @@ class BottomSheetIncomeFragment : BottomSheetDialogFragment() {
             binding.valueTextViewIn.text = it
         })
 
-        mainViewModel.readMoney.observe(viewLifecycleOwner, { money ->
-            moneyEntity = money.first()
-        })
-
-        Toast.makeText(requireContext(), args.moneyEntity.toString(), Toast.LENGTH_LONG).show()
-
         return binding.root
     }
 
     private fun addMoneyAmount() {
-
+        val moneyEntity = args.moneyEntity
         incomeList = moneyEntity.money.incomes
         val incomeValue = binding.valueTextViewIn.text.toString().toFloat()
         val income = IncomeModel(incomeValue)
@@ -95,10 +87,11 @@ class BottomSheetIncomeFragment : BottomSheetDialogFragment() {
             moneyEntity.money.expenses
         )
         mainViewModel.updateMoneyEntity(MoneyEntity(
-            1,
-            "Money",
+            moneyEntity.id,
+            moneyEntity.name,
             moneyAmount,
-            moneyModel
+            moneyModel,
+            moneyEntity.color
         ))
         findNavController().navigate(R.id.action_bottomSheetIncomeFragment_to_homeFragment)
     }

@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.mymoney.R
 import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentBottomSheetBinding
@@ -32,10 +33,10 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private val keyboardViewModel: KeyboardViewModel by viewModels()
     private lateinit var mainViewModel: MainViewModel
 
+    private val args: BottomSheetFragmentArgs by navArgs()
+
     private var expenseType = DEFAULT_TYPE
     private var expenseTypeId = 0
-
-    private lateinit var moneyEntity: MoneyEntity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,10 +55,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             updateChip(value.selectedTypeId, binding.spendTypeChipGroup)
         })
 
-        mainViewModel.readMoney.observe(viewLifecycleOwner, {
-            moneyEntity = it.first()
-        })
-
         binding.btn1.setOnClickListener { keyboardViewModel.addNumb("1") }
         binding.btn2.setOnClickListener { keyboardViewModel.addNumb("2") }
         binding.btn3.setOnClickListener { keyboardViewModel.addNumb("3") }
@@ -69,7 +66,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         binding.btn9.setOnClickListener { keyboardViewModel.addNumb("9") }
         binding.btn0.setOnClickListener { keyboardViewModel.addNumb("0") }
         binding.btnDel.setOnClickListener { keyboardViewModel.deleteNumb() }
-        //binding.btnDone.setOnClickListener { expenseMoney() }
 
         binding.spendTypeChipGroup.setOnCheckedChangeListener { group, checkedId ->
             val chip = group.findViewById<Chip>(checkedId)
@@ -102,6 +98,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun expenseMoney() {
+        val moneyEntity = args.moneyEntity
         val expenseList = moneyEntity.money.expenses
         val newExpense = binding.valueTextView.text.toString().toFloat()
         val newExpenseModel = ExpenseModel(
@@ -119,11 +116,13 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         )
         mainViewModel.updateMoneyEntity(
             MoneyEntity(
-            1,
-                "Money",
-            moneyAmount,
-            moneyModel
-        ))
+                moneyEntity.id,
+                moneyEntity.name,
+                moneyAmount,
+                moneyModel,
+                moneyEntity.color
+            )
+        )
         findNavController().navigate(R.id.action_bottomSheetFragment_to_homeFragment)
     }
 

@@ -83,11 +83,13 @@ class CardAdapter(
             expenseBtn.setOnClickListener {
                 val action = HomeFragmentDirections.actionHomeFragmentToBottomSheetFragment(card)
                 holder.itemView.findNavController().navigate(action)
+                mActionMode.finish()
             }
 
             incomeBtn.setOnClickListener {
                 val action = HomeFragmentDirections.actionHomeFragmentToBottomSheetIncomeFragment(card)
                 holder.itemView.findNavController().navigate(action)
+                mActionMode.finish()
             }
         }
         home.setOnClickListener {
@@ -109,7 +111,6 @@ class CardAdapter(
             expenseBtn?.visibility = View.INVISIBLE
             incomeBtn?.visibility = View.INVISIBLE
         }
-
     }
 
     private fun strokeWidth(holder: CardViewHolder, width: Int) {
@@ -137,7 +138,6 @@ class CardAdapter(
 
     override fun onActionItemClicked(actionMode: ActionMode?, p1: MenuItem?): Boolean {
         actionMode?.finish()
-
         return true
     }
 
@@ -148,7 +148,6 @@ class CardAdapter(
         }
         showBtns(false)
         cardViewHolders.clear()
-
     }
 
     fun clearActionMode() {
