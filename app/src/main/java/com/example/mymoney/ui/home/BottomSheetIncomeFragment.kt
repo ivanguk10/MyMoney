@@ -41,7 +41,6 @@ class BottomSheetIncomeFragment : BottomSheetDialogFragment() {
     private lateinit var moneyEntity: MoneyEntity
     private lateinit var incomeList: ArrayList<IncomeModel>
     private var moneyAmount = 0f
-
     //private val args: BottomSheetIncomeFragmentArgs by navArgs()
 
 

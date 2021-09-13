@@ -24,7 +24,7 @@ class CardAdapter(
     private lateinit var mActionMode: ActionMode
     private var cardViewHolders = arrayListOf<CardViewHolder>()
 
-    var id = 0L
+    private var id = 0
 
 
     class CardViewHolder(val binding: CardRowLayoutBinding): RecyclerView.ViewHolder(binding.root)
@@ -54,33 +54,28 @@ class CardAdapter(
 
         holder.binding.moneyCard.setOnClickListener{
 
-            if (cardViewHolders.isNotEmpty() && id == position.toLong()) {
+            if (cardViewHolders.isNotEmpty() && id == position) {
                 showBtns(false)
                 cardViewHolders.clear()
                 mActionMode.finish()
-                holder.binding.moneyCard.strokeWidth =
-                    requireActivity.resources.getDimension(R.dimen.strokeWidth).toInt()
+                strokeWidth(holder, R.dimen.strokeWidth)
                 holder.binding.moneyCard.invalidate()
             }
-            else if (cardViewHolders.isNotEmpty() && id != position.toLong()) {
-                cardViewHolders.first().binding.moneyCard.strokeWidth =
-                    requireActivity.resources.getDimension(R.dimen.strokeWidth).toInt()
+            else if (cardViewHolders.isNotEmpty() && id != position) {
+                strokeWidth(cardViewHolders.first(), R.dimen.strokeWidth)
                 cardViewHolders.first().binding.moneyCard.invalidate()
                 cardViewHolders.clear()
                 cardViewHolders.add(holder)
-                id = position.toLong()
-                holder.binding.moneyCard.strokeWidth =
-                    requireActivity.resources.getDimension(R.dimen.strokeWidthChecked).toInt()
+                id = position
+                strokeWidth(holder, R.dimen.strokeWidthChecked)
                 mActionMode.title = holder.binding.moneyName.text.toString()
                 holder.binding.moneyCard.invalidate()
             }
             else {
-                holder.binding.moneyCard.strokeWidth =
-                    requireActivity.resources.getDimension(R.dimen.strokeWidthChecked).toInt()
+                strokeWidth(holder, R.dimen.strokeWidthChecked)
                 showBtns(true)
                 cardViewHolders.add(holder)
-                id = position.toLong()
-                Toast.makeText(requireActivity, id.toString(), Toast.LENGTH_SHORT).show()
+                id = position
                 requireActivity.startActionMode(this)
                 mActionMode.title = holder.binding.moneyName.text.toString()
             }
@@ -98,7 +93,6 @@ class CardAdapter(
         home.setOnClickListener {
             if (cardViewHolders.isNotEmpty()) {
                 showBtns(false)
-                //checked = false
                 mActionMode.finish()
             }
         }
@@ -112,10 +106,15 @@ class CardAdapter(
             incomeBtn.visibility = View.VISIBLE
         }
         else {
-            expenseBtn.visibility = View.INVISIBLE
-            incomeBtn.visibility = View.INVISIBLE
+            expenseBtn?.visibility = View.INVISIBLE
+            incomeBtn?.visibility = View.INVISIBLE
         }
 
+    }
+
+    private fun strokeWidth(holder: CardViewHolder, width: Int) {
+        holder.binding.moneyCard.strokeWidth =
+            requireActivity.resources.getDimension(width).toInt()
     }
 
     override fun getItemCount(): Int {
@@ -144,14 +143,18 @@ class CardAdapter(
 
     override fun onDestroyActionMode(actionMode: ActionMode?) {
         cardViewHolders.forEach { card ->
-            card.binding.moneyCard.strokeWidth =
-                requireActivity.resources.getDimension(R.dimen.strokeWidth).toInt()
+            strokeWidth(card, R.dimen.strokeWidth)
             card.binding.moneyCard.invalidate()
-
         }
         showBtns(false)
         cardViewHolders.clear()
 
+    }
+
+    fun clearActionMode() {
+        if (this::mActionMode.isInitialized) {
+            mActionMode.finish()
+        }
     }
 
 

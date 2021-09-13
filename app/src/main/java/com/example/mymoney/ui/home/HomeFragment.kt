@@ -46,19 +46,9 @@ class HomeFragment : Fragment() {
             cardAdapter.setData(money)
         })
 
-//        binding.addMoneyFab.setOnClickListener {
-//            findNavController().navigate(R.id.action_homeFragment_to_bottomSheetIncomeFragment)
-//        }
-//
-//        binding.subtractMoneyFab.setOnClickListener {
-//            findNavController().navigate(R.id.action_homeFragment_to_bottomSheetFragment)
-//        }
-
         binding.addNewCardBtn.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_addNewCardFragment)
         }
-
-
 
         return binding.root
     }
@@ -74,6 +64,7 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        cardAdapter.clearActionMode()
     }
 
 
