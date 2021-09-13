@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mymoney.OnCardViewClickListener
 import com.example.mymoney.R
 import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.CardRowLayoutBinding
@@ -18,10 +19,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class CardAdapter(
-    private val requireActivity: FragmentActivity
+    private val requireActivity: FragmentActivity,
+    private val listener: OnCardViewClickListener
 ): RecyclerView.Adapter<CardAdapter.CardViewHolder>(), ActionMode.Callback {
-
-    private var checked = false
 
     private var cards = emptyList<MoneyEntity>()
 
@@ -29,7 +29,6 @@ class CardAdapter(
     private var cardViewHolders = arrayListOf<CardViewHolder>()
 
     private var id = 0
-
 
     class CardViewHolder(val binding: CardRowLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -57,6 +56,8 @@ class CardAdapter(
         holder.binding.moneyCountTextView.text = card.value.toString()
 
         holder.binding.moneyCard.setOnClickListener{
+
+            listener.onCardClick(position)
 
             if (cardViewHolders.isNotEmpty() && id == position) {
                 showBtns(false)

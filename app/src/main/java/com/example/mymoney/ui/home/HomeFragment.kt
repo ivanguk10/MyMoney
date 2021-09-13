@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mymoney.OnCardViewClickListener
 import com.example.mymoney.adapters.CardAdapter
 import com.example.mymoney.R
 import com.example.mymoney.database.entities.MoneyEntity
@@ -17,14 +18,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), OnCardViewClickListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     private val mainViewModel: MainViewModel by viewModels()
-    private val cardAdapter: CardAdapter by lazy { CardAdapter(requireActivity()) }
-    private var moneyEntity: MoneyEntity? = null
+    private val cardAdapter: CardAdapter by lazy { CardAdapter(requireActivity(), this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,6 @@ class HomeFragment : Fragment() {
         setUpRecyclerView()
 
         mainViewModel.readMoney.observe(viewLifecycleOwner, { money ->
-
             cardAdapter.setData(money)
         })
 
@@ -65,6 +64,10 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         cardAdapter.clearActionMode()
+    }
+
+    override fun onCardClick(data: Int) {
+        binding.homeRecyclerView.smoothScrollToPosition(data)
     }
 
 
