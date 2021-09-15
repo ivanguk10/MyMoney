@@ -4,6 +4,7 @@
     <color name="gray">#37474f</color>
     <color name="lightGray">#62727b</color>
     <color name="lightestGray">#F9F9F9</color>
+    <color name="lightest">#F9F7FF</color>
     <color name="lightMediumGray">#80D1D1D1</color>
     <color name="light">#A1ABB1</color>
     <color name="dark">#102027</color>
@@ -15,6 +16,7 @@
     <color name="darkPurple">#6969BF</color>
     <color name="purple_500">#8081b3</color>
     <color name="purple_700">#206200EA</color>
+    <color name="darkestPurple">#603998</color>
 
     <!--  Choose Card colors  -->
     <color name="bronze">#CD7F32</color>

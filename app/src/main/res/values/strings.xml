@@ -30,4 +30,6 @@
     <string name="subscription">Subscription</string>
     <string name="presents">Presents</string>
     <string name="cards">Cards</string>
+    <string name="time">Time</string>
+    <string name="for_last_week">For last week</string>
 </resources>
