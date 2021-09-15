@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Base application theme. -->
     <style name="Theme.MyMoney" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -47,6 +47,14 @@
     <style name="ActionMode" parent="Base.Widget.AppCompat.ActionMode">
         <item name="background">@color/white</item>
         <item name="backgroundSplit">@color/white</item>
+    </style>
+
+    <style name="autoComplete" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/auto_complete_color</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="endIconTint">@color/purpleDark</item>
+        <item name="hintTextColor">@color/darkPurple</item>
+        <item name="android:textColorHint">@color/darkPurple</item>
     </style>
 
 <!--    <style name="Theme.MyMoney.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />-->
