@@ -30,6 +30,7 @@
     <color name="red">#F14E4E</color>
     <!-- Day theme  -->
 
+    <color name="newBackground">#f7f6fd</color>
     <color name="backgroundColor">@color/lightestGray</color>
     <color name="background">@color/purpleLight</color>
     <color name="bottomNavCheckedItemColor">@color/darkPurple</color>

@@ -32,4 +32,11 @@
     <string name="cards">Cards</string>
     <string name="time">Time</string>
     <string name="for_last_week">For last week</string>
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="Week">Week</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
+    <string name="sort">Sort</string>
+    <string name="sort_by_date">Sort By Date</string>
 </resources>

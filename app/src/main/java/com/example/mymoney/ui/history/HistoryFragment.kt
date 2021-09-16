@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.mymoney.R
 import com.example.mymoney.adapters.MoneyAdapter
 import com.example.mymoney.database.entities.MoneyEntity
@@ -45,7 +47,7 @@ class HistoryFragment : Fragment() {
         mainViewModel.readMoney.observe(viewLifecycleOwner, { cards ->
 
             val firstExpenseList = cards.first().money.expenses
-            adapter.setData(sortForLastWeek(firstExpenseList))
+            adapter.setData(firstExpenseList)
             binding.cardName.text = cards.first().name
 
             cards.forEach {
@@ -62,49 +64,22 @@ class HistoryFragment : Fragment() {
                 binding.cardName.text = cards[i].name
                 cardPosition = i
             }
-
-            val arrayList = arrayListOf("For last week", "For last month", "For last year", "For all time")
-            val timeArrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_card_name, arrayList)
-            binding.autoCompleteTimeTextView.setAdapter(timeArrayAdapter)
-            binding.autoCompleteTimeTextView.setOnItemClickListener { adapterView, view, i, l ->
-                val expenseList = cards[cardPosition].money.expenses
-                when(i) {
-                    0 -> {
-                        adapter.setData(sortForLastWeek(expenseList))
-                    }
-                }
-            }
         })
 
 
         setUpRecyclerView()
 
-        val calendar = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm")
-        val a = dateFormat.format(calendar.time)
-        //Toast.makeText(requireContext(), a.toString(), Toast.LENGTH_SHORT).show()
-
-
+        binding.sortFab.setOnClickListener {
+            findNavController().navigate(R.id.action_historyFragment_to_sortFragment)
+        }
 
         return binding.root
     }
 
-    private fun sortForLastWeek(listOfExpenses: ArrayList<ExpenseModel>): ArrayList<ExpenseModel> {
-        val calendar = Calendar.getInstance()
-        val simpleDateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm")
-        val newList: ArrayList<ExpenseModel> = arrayListOf()
-        listOfExpenses.forEach {
-            val date = simpleDateFormat.parse(it.date)
-            if (date.date + 7 > calendar.time.date) {
-                newList.add(it)
-            }
-        }
-        return newList
-    }
 
     private fun setUpRecyclerView() {
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
     }
 
     override fun onDestroyView() {

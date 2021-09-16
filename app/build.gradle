@@ -38,6 +38,10 @@ android {
         viewBinding true
         dataBinding true
     }
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+    }
 }
 
 dependencies {
@@ -57,7 +61,7 @@ dependencies {
     // Material Components
     implementation 'com.google.android.material:material:1.4.0'
 
-
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     // Room components
     implementation "androidx.room:room-runtime:2.3.0"

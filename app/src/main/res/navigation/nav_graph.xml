@@ -36,6 +36,9 @@
         <argument
             android:name="args"
             app:argType="com.example.mymoney.database.entities.MoneyEntity" />
+        <action
+            android:id="@+id/action_historyFragment_to_sortFragment"
+            app:destination="@id/sortFragment" />
     </fragment>
     <fragment
         android:id="@+id/currencyFragment"
@@ -104,5 +107,14 @@
         <action
             android:id="@+id/action_addNewCardFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/sortFragment"
+        android:name="com.example.mymoney.SortFragment"
+        android:label="fragment_sort"
+        tools:layout="@layout/fragment_sort" >
+        <action
+            android:id="@+id/action_sortFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
     </dialog>
 </navigation>
