@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/money"
-            android:textColor="@color/black"
+            android:textColor="@color/darkestPurple"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/Week"
             android:textSize="16sp"
-            android:textColor="@color/black"
+            android:textColor="@color/lightGray"
             app:layout_constraintTop_toBottomOf="@+id/cardName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

@@ -19,7 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:cardCornerRadius="14dp"
-            app:cardBackgroundColor="@color/white">
+            app:cardBackgroundColor="@color/white"
+            app:strokeColor="#E7E7ED"
+            app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -37,7 +39,7 @@
                     android:layout_marginEnd="16dp"
                     android:fontFamily="sans-serif"
                     android:text="@string/car"
-                    android:textColor="@color/black"
+                    android:textColor="@color/darkestPurple"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toStartOf="@+id/imageView2"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -59,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="4dp"
                         android:text="20"
-                        android:textColor="@color/black"
+                        android:textColor="@color/darkestPurple"
                         android:textSize="16sp" />
 
                     <TextView
@@ -67,7 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="BYN"
-                        android:textColor="@color/black"
+                        android:textColor="@color/darkestPurple"
                         android:textSize="16sp" />
 
 
@@ -93,6 +95,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:tint="#a9abc1"
                     app:layout_constraintTop_toTopOf="@+id/expenseType"
                     app:srcCompat="@drawable/ic_supermarket" />
 
