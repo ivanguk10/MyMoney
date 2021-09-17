@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.mymoney.R
@@ -19,6 +22,10 @@ import com.example.mymoney.models.ExpenseModel
 import com.example.mymoney.models.MoneyModel
 import com.example.mymoney.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -33,6 +40,7 @@ class HistoryFragment : Fragment() {
     private lateinit var moneyEntity: MoneyEntity
     private var listOfNames: ArrayList<String> = arrayListOf()
     private var cardPosition = 0
+    private val args: HistoryFragmentArgs? by navArgs()
 
 
     override fun onCreateView(
@@ -46,28 +54,21 @@ class HistoryFragment : Fragment() {
 
         mainViewModel.readMoney.observe(viewLifecycleOwner, { cards ->
 
-            val firstExpenseList = cards.first().money.expenses
-            adapter.setData(firstExpenseList)
-            binding.cardName.text = cards.first().name
+//            val firstExpenseList = cards.first().money.expenses
+//            adapter.setData(firstExpenseList)
+//            binding.cardName.text = cards.first().name
 
             cards.forEach {
                 listOfNames.add(it.name)
             }
 
-            val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_card_name, listOfNames)
-            binding.autoCompleteTextView.setAdapter(arrayAdapter)
-
-            binding.autoCompleteTextView.setOnItemClickListener { adapterView, view, i, l ->
-                Toast.makeText(requireContext(), i.toString(), Toast.LENGTH_SHORT).show()
-                val expenseList = cards[i].money.expenses
-                adapter.setData(expenseList)
-                binding.cardName.text = cards[i].name
-                cardPosition = i
-            }
         })
 
 
         setUpRecyclerView()
+        if (args?.args != null) {
+            adapter.setData(args!!.args!!.toMutableList())
+        }
 
         binding.sortFab.setOnClickListener {
             findNavController().navigate(R.id.action_historyFragment_to_sortFragment)

@@ -8,7 +8,7 @@ import com.example.mymoney.models.ExpenseModel
 
 class MoneyAdapter: RecyclerView.Adapter<MoneyAdapter.MyViewHolder>() {
 
-    private var expenses: ArrayList<ExpenseModel> = arrayListOf()
+    private var expenses: MutableList<ExpenseModel> = mutableListOf()
 
     class MyViewHolder(val binding: ExpenseRowLayoutBinding): RecyclerView.ViewHolder(binding.root) {}
 
@@ -39,7 +39,7 @@ class MoneyAdapter: RecyclerView.Adapter<MoneyAdapter.MyViewHolder>() {
 //        diffUtilResult.dispatchUpdatesTo(this)
 //    }
 
-    fun setData(newData: ArrayList<ExpenseModel>) {
+    fun setData(newData: MutableList<ExpenseModel>) {
         this.expenses = newData
         notifyDataSetChanged()
     }

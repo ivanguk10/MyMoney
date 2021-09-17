@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentSortBinding
 import com.example.mymoney.models.ExpenseModel
@@ -32,6 +33,7 @@ class SortFragment : BottomSheetDialogFragment() {
     private var listOfNames: ArrayList<String> = arrayListOf()
     private var moneyEntity: MoneyEntity? = null
     private var sortChoice = 0
+    private var sortedList: ArrayList<ExpenseModel> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,6 +74,7 @@ class SortFragment : BottomSheetDialogFragment() {
         binding.week.setOnClickListener {
             sortChoice = 3
             Toast.makeText(requireContext(), sortChoice.toString(), Toast.LENGTH_SHORT).show()
+            sortedList = sortWeek(moneyEntity)
         }
 
         binding.month.setOnClickListener {
@@ -84,16 +87,21 @@ class SortFragment : BottomSheetDialogFragment() {
             Toast.makeText(requireContext(), sortChoice.toString(), Toast.LENGTH_SHORT).show()
         }
 
+        binding.sortButton.setOnClickListener {
+            val action = SortFragmentDirections.actionSortFragmentToHistoryFragment(sortedList.toTypedArray())
+            findNavController().navigate(action)
+        }
+
 
         return binding.root
     }
 
 
-    private fun sortWeek(money: MoneyEntity): ArrayList<ExpenseModel> {
+    private fun sortWeek(money: MoneyEntity?): ArrayList<ExpenseModel> {
 
         val newList: ArrayList<ExpenseModel> = arrayListOf()
 
-        money.money.expenses.forEach {
+        money?.money?.expenses?.forEach {
             val date = stringToLocaleDate(it.date)
             val dayOfWeek = WeekFields.of(Locale.getDefault()).dayOfWeek()
             val start = LocalDate.now().with(dayOfWeek, 1)
@@ -107,7 +115,7 @@ class SortFragment : BottomSheetDialogFragment() {
 
     private fun stringToLocaleDate(dateString: String): LocalDate {
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        return parse(dateString, formatter)
+        return parse(dateString.dropLast(6), formatter)
     }
 
     override fun onDestroyView() {
