@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -36,7 +38,7 @@ class SortFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentSortBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -100,51 +102,6 @@ class SortFragment : BottomSheetDialogFragment() {
         return binding.root
     }
 
-    private fun selectedItem(choice: Int) {
-        if (choice == 1) {
-            binding.todayTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.darkPurple))
-            binding.todayCheck.visibility = View.VISIBLE
-        }
-        else {
-           binding.todayTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.lightGray))
-           binding.todayCheck.visibility = View.INVISIBLE
-        }
-        if (choice == 2) {
-            binding.yesterdayTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.darkPurple))
-            binding.yesterdayCheck.visibility = View.VISIBLE
-        }
-        else {
-            binding.yesterdayTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.lightGray))
-            binding.yesterdayCheck.visibility = View.INVISIBLE
-        }
-        if (choice == 3) {
-            binding.weekTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.darkPurple))
-            binding.weekCheck.visibility = View.VISIBLE
-        }
-        else {
-            binding.weekTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.lightGray))
-            binding.weekCheck.visibility = View.INVISIBLE
-        }
-        if (choice == 4) {
-            binding.monthTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.darkPurple))
-            binding.monthCheck.visibility = View.VISIBLE
-        }
-        else {
-            binding.monthTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.lightGray))
-            binding.monthCheck.visibility = View.INVISIBLE
-        }
-        if (choice == 5) {
-            binding.yearTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.darkPurple))
-            binding.yearCheck.visibility = View.VISIBLE
-        }
-        else {
-            binding.yearTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.lightGray))
-            binding.yearCheck.visibility = View.INVISIBLE
-        }
-
-
-    }
-
     private fun sortWeek(money: MoneyEntity?): ArrayList<ExpenseModel> {
 
         val newList: ArrayList<ExpenseModel> = arrayListOf()
@@ -205,6 +162,44 @@ class SortFragment : BottomSheetDialogFragment() {
     private fun stringToLocaleDate(dateString: String): LocalDate {
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
         return parse(dateString.dropLast(6), formatter)
+    }
+
+    private fun clickedSort(textView: TextView, imageView: ImageView, flag: Boolean) {
+        if (flag) {
+            textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.darkPurple))
+            imageView.visibility = View.VISIBLE
+        }
+        else {
+            textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.lightGray))
+            imageView.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun selectedItem(choice: Int) {
+        if (choice == 1)
+            clickedSort(binding.todayTv, binding.todayCheck, true)
+        else
+            clickedSort(binding.todayTv, binding.todayCheck, false)
+
+        if (choice == 2)
+            clickedSort(binding.yesterdayTv, binding.yesterdayCheck, true)
+        else
+            clickedSort(binding.yesterdayTv, binding.yesterdayCheck, false)
+
+        if (choice == 3)
+            clickedSort(binding.weekTv, binding.weekCheck, true)
+        else
+            clickedSort(binding.weekTv, binding.weekCheck, false)
+
+        if (choice == 4)
+            clickedSort(binding.monthTv, binding.monthCheck, true)
+        else
+            clickedSort(binding.monthTv, binding.monthCheck, false)
+
+        if (choice == 5)
+            clickedSort(binding.yearTv, binding.yearCheck, true)
+        else
+            clickedSort(binding.yearTv, binding.yearCheck, false)
     }
 
     override fun onDestroyView() {
