@@ -91,6 +91,7 @@ class SortFragment : BottomSheetDialogFragment() {
         binding.year.setOnClickListener {
             sortChoice = 5
             Toast.makeText(requireContext(), sortChoice.toString(), Toast.LENGTH_SHORT).show()
+            sortedList = sortYear(moneyEntity)
             selectedItem(sortChoice)
         }
 
@@ -153,6 +154,21 @@ class SortFragment : BottomSheetDialogFragment() {
         money?.money?.expenses?.forEach {
             val date = stringToLocaleDate(it.date)
             if (date == yesterday) {
+                newList.add(it)
+            }
+        }
+        return newList
+    }
+
+    private fun sortYear(money: MoneyEntity?): ArrayList<ExpenseModel> {
+        val newList: ArrayList<ExpenseModel> = arrayListOf()
+        val now = LocalDate.now()
+        val start = now.withDayOfYear(1)
+        val end = now.withDayOfYear(now.lengthOfYear())
+
+        money?.money?.expenses?.forEach {
+            val date = stringToLocaleDate(it.date)
+            if (date == start || date == end || date.isAfter(start) && date.isBefore(end)) {
                 newList.add(it)
             }
         }
