@@ -36,11 +36,6 @@
         <action
             android:id="@+id/action_historyFragment_to_sortFragment"
             app:destination="@id/sortFragment" />
-        <argument
-            android:name="args"
-            app:argType="com.example.mymoney.models.ExpenseModel[]"
-            app:nullable="true"
-            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/currencyFragment"

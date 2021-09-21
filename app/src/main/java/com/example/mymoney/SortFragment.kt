@@ -9,12 +9,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentSortBinding
 import com.example.mymoney.models.ExpenseModel
 import com.example.mymoney.viewmodel.MainViewModel
+import com.example.mymoney.viewmodel.SortViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
@@ -32,8 +35,9 @@ class SortFragment : BottomSheetDialogFragment() {
     private lateinit var mainViewModel: MainViewModel
     private var listOfNames: ArrayList<String> = arrayListOf()
     private var moneyEntity: MoneyEntity? = null
-    private var sortChoice = 0
-    private var sortedList: ArrayList<ExpenseModel> = arrayListOf()
+    private var moneyEntityId = 0
+    private var sortChoice: Int? = null
+    private val sortViewModel: SortViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +48,11 @@ class SortFragment : BottomSheetDialogFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+        sortViewModel.readSortCardType.asLiveData().observe(viewLifecycleOwner, {
+            sortChoice = it.sortId
+            selectedItem(sortChoice!!)
+        })
 
         mainViewModel.readMoney.observe(viewLifecycleOwner, { cards ->
 
@@ -57,127 +66,44 @@ class SortFragment : BottomSheetDialogFragment() {
             binding.autoCompleteTextView.setOnItemClickListener { adapterView, view, i, l ->
                 Toast.makeText(requireContext(), i.toString(), Toast.LENGTH_SHORT).show()
                 moneyEntity = cards[i]
+                moneyEntityId = i
             }
         })
 
         binding.today.setOnClickListener {
-            sortChoice = 1
-            Toast.makeText(requireContext(), sortChoice.toString(), Toast.LENGTH_SHORT).show()
-            selectedItem(sortChoice)
-            sortedList = sortToday(moneyEntity)
+            sortChoice = 0
+            selectedItem(sortChoice!!)
         }
 
         binding.yesterday.setOnClickListener {
-            sortChoice = 2
-            Toast.makeText(requireContext(), sortChoice.toString(), Toast.LENGTH_SHORT).show()
-            selectedItem(sortChoice)
-            sortedList = sortYesterday(moneyEntity)
+            sortChoice = 1
+            selectedItem(sortChoice!!)
         }
 
         binding.week.setOnClickListener {
-            sortChoice = 3
-            Toast.makeText(requireContext(), sortChoice.toString(), Toast.LENGTH_SHORT).show()
-            sortedList = sortWeek(moneyEntity)
-            selectedItem(sortChoice)
+            sortChoice = 2
+            selectedItem(sortChoice!!)
         }
 
         binding.month.setOnClickListener {
-            sortChoice = 4
-            Toast.makeText(requireContext(), sortChoice.toString(), Toast.LENGTH_SHORT).show()
-            sortedList = sortMonth(moneyEntity)
-            selectedItem(sortChoice)
+            sortChoice = 3
+            selectedItem(sortChoice!!)
         }
 
         binding.year.setOnClickListener {
-            sortChoice = 5
-            Toast.makeText(requireContext(), sortChoice.toString(), Toast.LENGTH_SHORT).show()
-            sortedList = sortYear(moneyEntity)
-            selectedItem(sortChoice)
+            sortChoice = 4
+            selectedItem(sortChoice!!)
         }
 
         binding.sortButton.setOnClickListener {
-            val action = SortFragmentDirections.actionSortFragmentToHistoryFragment(sortedList.toTypedArray())
+
+            sortViewModel.saveSortCardType(moneyEntityId, sortChoice!!)
+
+            val action = SortFragmentDirections.actionSortFragmentToHistoryFragment()
             findNavController().navigate(action)
         }
 
         return binding.root
-    }
-
-    private fun sortWeek(money: MoneyEntity?): ArrayList<ExpenseModel> {
-
-        val newList: ArrayList<ExpenseModel> = arrayListOf()
-
-        money?.money?.expenses?.forEach {
-            val date = stringToLocaleDate(it.date)
-            val dayOfWeek = WeekFields.of(Locale.getDefault()).dayOfWeek()
-            val start = LocalDate.now().with(dayOfWeek, 1)
-            val end = start.plusDays(6)
-            if (date == start || date == end || date.isAfter(start) && date.isBefore(end)) {
-                newList.add(it)
-            }
-        }
-        return newList
-    }
-
-    private fun sortMonth(money: MoneyEntity?): ArrayList<ExpenseModel> {
-        val newList: ArrayList<ExpenseModel> = arrayListOf()
-        val now = LocalDate.now()
-        val start = now.withDayOfMonth(1)
-        val end = now.withDayOfMonth(now.lengthOfMonth())
-
-        money?.money?.expenses?.forEach {
-            val date = stringToLocaleDate(it.date)
-            if (date == start || date == end || date.isAfter(start) && date.isBefore(end)) {
-                newList.add(it)
-            }
-        }
-        return newList
-    }
-
-    private fun sortToday(money: MoneyEntity?): ArrayList<ExpenseModel> {
-        val newList: ArrayList<ExpenseModel> = arrayListOf()
-        val today = LocalDate.now()
-
-        money?.money?.expenses?.forEach {
-            val date = stringToLocaleDate(it.date)
-            if (date == today) {
-                newList.add(it)
-            }
-        }
-        return newList
-    }
-
-    private fun sortYesterday(money: MoneyEntity?): ArrayList<ExpenseModel> {
-        val newList: ArrayList<ExpenseModel> = arrayListOf()
-        val yesterday = LocalDate.now().minusDays(1)
-
-        money?.money?.expenses?.forEach {
-            val date = stringToLocaleDate(it.date)
-            if (date == yesterday) {
-                newList.add(it)
-            }
-        }
-        return newList
-    }
-
-    private fun sortYear(money: MoneyEntity?): ArrayList<ExpenseModel> {
-        val newList: ArrayList<ExpenseModel> = arrayListOf()
-        val now = LocalDate.now()
-        val start = now.withDayOfYear(1)
-        val end = now.withDayOfYear(now.lengthOfYear())
-
-        money?.money?.expenses?.forEach {
-            val date = stringToLocaleDate(it.date)
-            if (date == start || date == end || date.isAfter(start) && date.isBefore(end)) {
-                newList.add(it)
-            }
-        }
-        return newList
-    }
-
-    private fun stringToLocaleDate(dateString: String): LocalDate {
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        return parse(dateString.dropLast(6), formatter)
     }
 
     private fun clickedSort(textView: TextView, imageView: ImageView, flag: Boolean) {
@@ -192,27 +118,27 @@ class SortFragment : BottomSheetDialogFragment() {
     }
 
     private fun selectedItem(choice: Int) {
-        if (choice == 1)
+        if (choice == 0)
             clickedSort(binding.todayTv, binding.todayCheck, true)
         else
             clickedSort(binding.todayTv, binding.todayCheck, false)
 
-        if (choice == 2)
+        if (choice == 1)
             clickedSort(binding.yesterdayTv, binding.yesterdayCheck, true)
         else
             clickedSort(binding.yesterdayTv, binding.yesterdayCheck, false)
 
-        if (choice == 3)
+        if (choice == 2)
             clickedSort(binding.weekTv, binding.weekCheck, true)
         else
             clickedSort(binding.weekTv, binding.weekCheck, false)
 
-        if (choice == 4)
+        if (choice == 3)
             clickedSort(binding.monthTv, binding.monthCheck, true)
         else
             clickedSort(binding.monthTv, binding.monthCheck, false)
 
-        if (choice == 5)
+        if (choice == 4)
             clickedSort(binding.yearTv, binding.yearCheck, true)
         else
             clickedSort(binding.yearTv, binding.yearCheck, false)

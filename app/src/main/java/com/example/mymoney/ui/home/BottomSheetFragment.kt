@@ -15,7 +15,6 @@ import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentBottomSheetBinding
 import com.example.mymoney.models.ExpenseModel
 import com.example.mymoney.models.MoneyModel
-import com.example.mymoney.util.Constants.Companion.DEFAULT_TYPE
 import com.example.mymoney.viewmodel.KeyboardViewModel
 import com.example.mymoney.viewmodel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -35,8 +34,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private val args: BottomSheetFragmentArgs by navArgs()
 
-    private var expenseType = DEFAULT_TYPE
-    private var expenseTypeId = 0
+    private var expenseType = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,10 +48,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         _binding = FragmentBottomSheetBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        mainViewModel.readExpenseType.asLiveData().observe(viewLifecycleOwner, { value ->
-            expenseType = value.selectedType
-            updateChip(value.selectedTypeId, binding.spendTypeChipGroup)
-        })
 
         binding.btn1.setOnClickListener { keyboardViewModel.addNumb("1") }
         binding.btn2.setOnClickListener { keyboardViewModel.addNumb("2") }
@@ -70,7 +64,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         binding.spendTypeChipGroup.setOnCheckedChangeListener { group, checkedId ->
             val chip = group.findViewById<Chip>(checkedId)
             expenseType = chip.text.toString()
-            expenseTypeId = checkedId
         }
 
         keyboardViewModel.amount.observe(viewLifecycleOwner, {
@@ -78,23 +71,10 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         })
 
         binding.btnDone.setOnClickListener {
-            mainViewModel.saveExpenseTypeTemp(expenseType, expenseTypeId)
             expenseMoney()
         }
 
         return binding.root
-    }
-
-    private fun updateChip(chipId: Int, chipGroup: ChipGroup) {
-        if (chipId != 0) {
-            try {
-                val chip = chipGroup.findViewById<Chip>(chipId)
-                chip.isChecked = true
-                chipGroup.requestChildFocus(chip, chip)
-            } catch (e:Exception) {
-                Log.d("bottomSheet", e.message.toString())
-            }
-        }
     }
 
     private fun expenseMoney() {

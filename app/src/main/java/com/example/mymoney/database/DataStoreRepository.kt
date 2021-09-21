@@ -4,10 +4,9 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.mymoney.util.Constants.Companion.DEFAULT_TYPE
+import com.example.mymoney.util.Constants.Companion.PREFERENCES_CARD_ID
 import com.example.mymoney.util.Constants.Companion.PREFERENCES_NAME
-import com.example.mymoney.util.Constants.Companion.PREFERENCES_TYPE
-import com.example.mymoney.util.Constants.Companion.PREFERENCES_TYPE_ID
+import com.example.mymoney.util.Constants.Companion.PREFERENCES_SORT_ID
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
@@ -22,20 +21,20 @@ private val Context.dataStore by preferencesDataStore(PREFERENCES_NAME)
 class DataStoreRepository @Inject constructor(@ApplicationContext private val context: Context){
 
     private object PreferencesKeys {
-        val selectedType = stringPreferencesKey(PREFERENCES_TYPE)
-        val selectedTypeId = intPreferencesKey(PREFERENCES_TYPE_ID)
+        val cardId = intPreferencesKey(PREFERENCES_CARD_ID)
+        val sortId = intPreferencesKey(PREFERENCES_SORT_ID)
     }
 
     private val dataStore: DataStore<Preferences> = context.dataStore
 
-    suspend fun saveExpenseType(type: String, typeId: Int) {
+    suspend fun saveSortType(cardId: Int, sortId: Int) {
         dataStore.edit { preferences ->
-            preferences[PreferencesKeys.selectedType] = type
-            preferences[PreferencesKeys.selectedTypeId] = typeId
+            preferences[PreferencesKeys.cardId] = cardId
+            preferences[PreferencesKeys.sortId] = sortId
         }
     }
 
-    val readExpenseType: Flow<ExpenseType> = dataStore.data
+    val readSortType: Flow<SortCardType> = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
                 emit(emptyPreferences())
@@ -44,18 +43,16 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             }
         }
         .map { preferences ->
-            val selectedType = preferences[PreferencesKeys.selectedType] ?: DEFAULT_TYPE
-            val selectedTypeId = preferences[PreferencesKeys.selectedTypeId] ?: 0
-            ExpenseType(
-                selectedType,
-                selectedTypeId
+            val cardId = preferences[PreferencesKeys.cardId] ?: 0
+            val sortId = preferences[PreferencesKeys.sortId] ?: 0
+            SortCardType(
+                cardId,
+                sortId
             )
         }
-
-
 }
 
-data class ExpenseType(
-    val selectedType: String,
-    val selectedTypeId: Int
+data class SortCardType(
+    val cardId: Int,
+    val sortId: Int
 )

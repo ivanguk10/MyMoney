@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.mymoney.database.DataStoreRepository
-import com.example.mymoney.database.ExpenseType
 import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +16,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val repository: Repository,
-    private val dataStoreRepository: DataStoreRepository,
     application: Application
 ): AndroidViewModel(application) {
 
@@ -26,7 +24,6 @@ class MainViewModel @Inject constructor(
     val readMoney: LiveData<List<MoneyEntity>> = repository.local.readMoney()
     val readEntity: LiveData<MoneyEntity> = repository.local.getMoneyEntity(1)
 
-    val readExpenseType = dataStoreRepository.readExpenseType
 
     fun insertMoneyEntity(moneyEntity: MoneyEntity) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -40,9 +37,6 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun saveExpenseTypeTemp(expenseType: String, expenseTypeId: Int) {
-        ExpenseType(expenseType, expenseTypeId)
-    }
 
 
 
