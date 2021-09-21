@@ -5,23 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.mymoney.R
 import com.example.mymoney.adapters.MoneyAdapter
 import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentHistoryBinding
 import com.example.mymoney.models.ExpenseModel
-import com.example.mymoney.models.MoneyModel
 import com.example.mymoney.util.Constants.Companion.THIS_MONTH
 import com.example.mymoney.util.Constants.Companion.THIS_WEEK
 import com.example.mymoney.util.Constants.Companion.THIS_YEAR
@@ -30,14 +22,7 @@ import com.example.mymoney.util.Constants.Companion.YESTERDAY
 import com.example.mymoney.viewmodel.MainViewModel
 import com.example.mymoney.viewmodel.SortViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.properties.Delegates
+
 
 @AndroidEntryPoint
 class HistoryFragment : Fragment() {
@@ -55,7 +40,7 @@ class HistoryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHistoryBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -85,7 +70,7 @@ class HistoryFragment : Fragment() {
         return binding.root
     }
 
-    private fun chooseSort(moneyEntity: MoneyEntity, sortId: Int): ArrayList<ExpenseModel> {
+    private fun chooseSort(moneyEntity: MoneyEntity, sortId: Int): List<ExpenseModel> {
         var expenses = arrayListOf<ExpenseModel>()
         when(sortId) {
             0 -> {
@@ -109,7 +94,7 @@ class HistoryFragment : Fragment() {
                 sortCategory = THIS_YEAR
             }
         }
-        return expenses
+        return expenses.toList().reversed()
     }
 
 

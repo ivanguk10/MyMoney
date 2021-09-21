@@ -4,10 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mymoney.database.DataStoreRepository
-import com.example.mymoney.database.SortCardType
 import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.models.ExpenseModel
-import com.example.mymoney.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,7 +22,6 @@ class SortViewModel @Inject constructor(
     application: Application
 ): AndroidViewModel(application) {
 
-    private lateinit var sortCardType: SortCardType
     val readSortCardType = dataStoreRepository.readSortType
 
     fun saveSortCardType(cardId: Int, sortId: Int) {
@@ -35,15 +32,6 @@ class SortViewModel @Inject constructor(
             )
         }
     }
-//    fun saveSortCardTypeTemp(
-//        cardId: Int,
-//        sortId: Int
-//    ) {
-//        sortCardType = SortCardType(
-//            cardId,
-//            sortId
-//        )
-//    }
 
     fun sortWeek(money: MoneyEntity?): ArrayList<ExpenseModel> {
 

@@ -8,7 +8,7 @@ import com.example.mymoney.models.ExpenseModel
 
 class MoneyAdapter: RecyclerView.Adapter<MoneyAdapter.MyViewHolder>() {
 
-    private var expenses: MutableList<ExpenseModel> = mutableListOf()
+    private var expenses: List<ExpenseModel> = emptyList()
 
     class MyViewHolder(val binding: ExpenseRowLayoutBinding): RecyclerView.ViewHolder(binding.root) {}
 
@@ -32,14 +32,8 @@ class MoneyAdapter: RecyclerView.Adapter<MoneyAdapter.MyViewHolder>() {
         return expenses.size
     }
 
-//    fun setData(newData: List<ExpenseModel>) {
-//        val expensesDiffUtil = MoneyDiffUtil(ingredients, newData)
-//        val diffUtilResult = DiffUtil.calculateDiff(expensesDiffUtil)
-//        ingredients = newData
-//        diffUtilResult.dispatchUpdatesTo(this)
-//    }
 
-    fun setData(newData: MutableList<ExpenseModel>) {
+    fun setData(newData: List<ExpenseModel>) {
         this.expenses = newData
         notifyDataSetChanged()
     }

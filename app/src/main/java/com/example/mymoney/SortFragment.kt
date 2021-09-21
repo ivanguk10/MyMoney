@@ -15,16 +15,10 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentSortBinding
-import com.example.mymoney.models.ExpenseModel
 import com.example.mymoney.viewmodel.MainViewModel
 import com.example.mymoney.viewmodel.SortViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.LocalDate
-import java.time.LocalDate.parse
-import java.time.format.DateTimeFormatter
-import java.time.temporal.WeekFields
-import java.util.*
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
@@ -35,7 +29,7 @@ class SortFragment : BottomSheetDialogFragment() {
     private lateinit var mainViewModel: MainViewModel
     private var listOfNames: ArrayList<String> = arrayListOf()
     private var moneyEntity: MoneyEntity? = null
-    private var moneyEntityId = 0
+    private var moneyEntityId: Int? = null
     private var sortChoice: Int? = null
     private val sortViewModel: SortViewModel by viewModels()
 
@@ -49,12 +43,16 @@ class SortFragment : BottomSheetDialogFragment() {
 
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        sortViewModel.readSortCardType.asLiveData().observe(viewLifecycleOwner, {
-            sortChoice = it.sortId
-            selectedItem(sortChoice!!)
-        })
+
 
         mainViewModel.readMoney.observe(viewLifecycleOwner, { cards ->
+
+            sortViewModel.readSortCardType.asLiveData().observe(viewLifecycleOwner, {
+                sortChoice = it.sortId
+                moneyEntityId = it.cardId
+                selectedItem(sortChoice!!)
+                binding.autoCompleteTextView.setText(cards[moneyEntityId!!].name)
+            })
 
             cards.forEach {
                 listOfNames.add(it.name)
@@ -97,7 +95,7 @@ class SortFragment : BottomSheetDialogFragment() {
 
         binding.sortButton.setOnClickListener {
 
-            sortViewModel.saveSortCardType(moneyEntityId, sortChoice!!)
+            sortViewModel.saveSortCardType(moneyEntityId!!, sortChoice!!)
 
             val action = SortFragmentDirections.actionSortFragmentToHistoryFragment()
             findNavController().navigate(action)
