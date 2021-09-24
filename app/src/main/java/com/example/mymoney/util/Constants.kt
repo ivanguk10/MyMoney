@@ -1,5 +1,7 @@
 package com.example.mymoney.util
 
+import com.example.mymoney.R
+
 class Constants {
 
     companion object {
@@ -11,6 +13,7 @@ class Constants {
         const val PREFERENCES_SORT_ID = "preferencesSortId"
         const val PREFERENCES_CARD_ID = "preferencesCardId"
 
+        const val SUPERMARKET = (R.string.supermarket).toString()
         const val TODAY = "Today"
         const val YESTERDAY = "Yesterday"
         const val THIS_WEEK = "This Week"

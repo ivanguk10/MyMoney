@@ -15,6 +15,7 @@ import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentBottomSheetBinding
 import com.example.mymoney.models.ExpenseModel
 import com.example.mymoney.models.MoneyModel
+import com.example.mymoney.util.Constants.Companion.SUPERMARKET
 import com.example.mymoney.viewmodel.KeyboardViewModel
 import com.example.mymoney.viewmodel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -34,7 +35,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private val args: BottomSheetFragmentArgs by navArgs()
 
-    private var expenseType = ""
+    private lateinit var expenseType: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +48,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     ): View? {
         _binding = FragmentBottomSheetBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-
+        expenseType = getString(R.string.supermarket)
 
         binding.btn1.setOnClickListener { keyboardViewModel.addNumb("1") }
         binding.btn2.setOnClickListener { keyboardViewModel.addNumb("2") }

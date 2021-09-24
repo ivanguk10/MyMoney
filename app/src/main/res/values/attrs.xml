@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PieChart">
+        <attr name="expense1" format="float"/>
+        <attr name="expense2" format="float"/>
+        <attr name="expense3" format="float"/>
+        <attr name="expense4" format="float"/>
+        <attr name="expense5" format="float"/>
+    </declare-styleable>
+</resources>

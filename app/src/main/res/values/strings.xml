@@ -39,4 +39,10 @@
     <string name="year">This Year</string>
     <string name="sort">Sort</string>
     <string name="sort_by_date">Sort By Date</string>
+    <string name="statics">Statics</string>
+    <string name="week_statistics">Week</string>
+    <string name="month_statistics">Month</string>
+    <string name="year_statistics">Year</string>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
 </resources>
