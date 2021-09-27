@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.example.mymoney.database.entities.ExpenseEntity
 import com.example.mymoney.database.entities.MoneyEntity
 import kotlinx.coroutines.flow.Flow
 import java.util.*
@@ -22,4 +23,11 @@ interface MoneyDao {
 
     @Query("SELECT * from money_table WHERE id = :id")
     fun getMoneyEntity(id: Int): LiveData<MoneyEntity>
+
+
+    @Query("SELECT * FROM money_table ORDER BY id ASC")
+    fun readExpenses(): LiveData<List<ExpenseEntity>>
+
+    @Insert
+    suspend fun insertExpenseEntity(expenseEntity: ExpenseEntity)
 }

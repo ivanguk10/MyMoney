@@ -3,11 +3,12 @@ package com.example.mymoney.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.example.mymoney.database.entities.ExpenseEntity
 import com.example.mymoney.database.entities.MoneyEntity
 
 
 @Database(
-    entities = [MoneyEntity::class],
+    entities = [MoneyEntity::class, ExpenseEntity::class],
     version = 1,
     exportSchema = true
 )

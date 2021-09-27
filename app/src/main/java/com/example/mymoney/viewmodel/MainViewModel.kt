@@ -25,6 +25,7 @@ class MainViewModel @Inject constructor(
     val readEntity: LiveData<MoneyEntity> = repository.local.getMoneyEntity(1)
 
 
+
     fun insertMoneyEntity(moneyEntity: MoneyEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.insertMoneyEntity(moneyEntity)
@@ -36,6 +37,8 @@ class MainViewModel @Inject constructor(
             repository.local.updateMoneyEntity(moneyEntity)
         }
     }
+
+
 
 
 

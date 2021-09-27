@@ -1,6 +1,7 @@
 package com.example.mymoney.database
 
 import androidx.lifecycle.LiveData
+import com.example.mymoney.database.entities.ExpenseEntity
 import com.example.mymoney.database.entities.MoneyEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -22,5 +23,13 @@ class LocalDataSource @Inject constructor(
 
     fun getMoneyEntity(id: Int): LiveData<MoneyEntity> {
         return moneyDao.getMoneyEntity(id)
+    }
+
+    fun readExpenses(): LiveData<List<ExpenseEntity>> {
+        return moneyDao.readExpenses()
+    }
+
+    suspend fun insertExpenseEntity(expenseEntity: ExpenseEntity) {
+        moneyDao.insertExpenseEntity(expenseEntity)
     }
 }

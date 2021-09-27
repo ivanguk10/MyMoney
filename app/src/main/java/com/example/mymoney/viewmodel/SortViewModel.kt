@@ -109,4 +109,48 @@ class SortViewModel @Inject constructor(
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
         return LocalDate.parse(dateString.dropLast(6), formatter)
     }
+
+    fun sortByTypeAndAmount(expenses: ArrayList<ExpenseModel>): Map<String, Float> {
+        val hashMap = HashMap<String, Float>()
+
+        expenses.forEach { expense ->
+            if (hashMap.containsKey(expense.type)) {
+                //hashMap.compute(expense.type) {key: String, value: Float? -> value!! + expense.amount }
+                val amount = hashMap[expense.type]
+                hashMap[expense.type] = expense.amount + amount!!
+            }
+            else{
+                hashMap[expense.type] = expense.amount
+            }
+
+        }
+
+        val sortedMap = hashMap.toList().sortedByDescending { (k, v) -> v }.toMap()
+
+        return sortedMap
+    }
+
+    fun valueToDiagramValue(values: ArrayList<Float>, totalExpense: Float): ArrayList<Float> {
+        val percentValues = arrayListOf(0f, 0f, 0f, 0f, 0f, 0f)
+        for (i in 0..5) {
+            percentValues[i] = (values[i] * 360)/totalExpense
+        }
+        return percentValues
+    }
+
+    fun getMostExpensiveCategories(map: Map<String, Float>): List<String> {
+
+        return map.keys.toList().slice(0..4)
+    }
+
+    fun getMostExpensiveValues(map: Map<String, Float>): ArrayList<Float> {
+        val values = arrayListOf(0f, 0f, 0f, 0f, 0f, 0f)
+        for (i in 0..4) {
+            values[i] = map.values.elementAt(i)
+        }
+        for (i in 5 until map.values.size) {
+            values[5] += map.values.elementAt(i)
+        }
+        return values
+    }
 }

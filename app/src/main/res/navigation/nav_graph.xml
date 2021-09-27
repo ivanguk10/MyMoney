@@ -110,7 +110,7 @@
     </dialog>
     <dialog
         android:id="@+id/sortFragment"
-        android:name="com.example.mymoney.SortFragment"
+        android:name="com.example.mymoney.ui.history.SortFragment"
         android:label="fragment_sort"
         tools:layout="@layout/fragment_sort" >
         <action

@@ -144,22 +144,17 @@ class PieChart(context: Context, attrs: AttributeSet): View(context, attrs) {
             centerY + radius
         )
 
-        val expStart = 0f
-        val expVal = 40f
+        val expStart = -90f
 
-        val exp2Start = exp1
-        val exp2Val = 50f
+        val exp2Start = exp1 - 90f
 
-        val exp3Start = exp1 + exp2
-        val exp3Val = 60f
+        val exp3Start = exp1 + exp2 - 90f
 
-        val exp4Start = exp1 + exp2 + exp3
-        val exp4Val = 70f
+        val exp4Start = exp1 + exp2 + exp3 - 90f
 
-        val exp5Start = exp1 + exp2 + exp3 + exp4
-        //val exp5Val = 360f - expVal - exp2Val - exp3Val - exp4Val
+        val exp5Start = exp1 + exp2 + exp3 + exp4 - 90f
 
-        val exp6Start = exp1 + exp2 + exp3 + exp4 + exp5
+        val exp6Start = exp1 + exp2 + exp3 + exp4 + exp5 - 90f
 
         canvas?.drawArc(oval1, expStart, exp1, false, expense1)
 

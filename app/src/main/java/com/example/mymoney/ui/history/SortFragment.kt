@@ -1,4 +1,4 @@
-package com.example.mymoney
+package com.example.mymoney.ui.history
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
+import com.example.mymoney.R
 import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentSortBinding
 import com.example.mymoney.viewmodel.MainViewModel
@@ -58,7 +59,8 @@ class SortFragment : BottomSheetDialogFragment() {
                 listOfNames.add(it.name)
             }
 
-            val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_card_name, listOfNames)
+            val arrayAdapter = ArrayAdapter(requireContext(),
+                R.layout.dropdown_card_name, listOfNames)
             binding.autoCompleteTextView.setAdapter(arrayAdapter)
 
             binding.autoCompleteTextView.setOnItemClickListener { adapterView, view, i, l ->
