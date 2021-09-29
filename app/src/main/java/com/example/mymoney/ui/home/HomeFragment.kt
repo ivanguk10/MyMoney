@@ -57,6 +57,10 @@ class HomeFragment : Fragment(), OnCardViewClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_weekStatisticsFragment)
         }
 
+        binding.monthStat.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_monthStatisticsFragment)
+        }
+
         return binding.root
     }
 

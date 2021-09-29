@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_homeFragment_to_weekStatisticsFragment"
             app:destination="@id/weekStatisticsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_monthStatisticsFragment"
+            app:destination="@id/monthStatisticsFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -125,4 +128,13 @@
             android:id="@+id/action_weekStatisticsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/monthStatisticsFragment"
+        android:name="com.example.mymoney.ui.statistics.MonthStatisticsFragment"
+        android:label="fragment_month_statistics"
+        tools:layout="@layout/fragment_month_statistics" >
+        <action
+            android:id="@+id/action_monthStatisticsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

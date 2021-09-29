@@ -25,7 +25,7 @@ class LocalDataSource @Inject constructor(
         return moneyDao.getMoneyEntity(id)
     }
 
-    fun readExpenses(): LiveData<List<ExpenseEntity>> {
+    suspend fun readExpenses(): List<ExpenseEntity> {
         return moneyDao.readExpenses()
     }
 

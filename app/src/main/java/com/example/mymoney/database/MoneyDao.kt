@@ -25,8 +25,8 @@ interface MoneyDao {
     fun getMoneyEntity(id: Int): LiveData<MoneyEntity>
 
 
-    @Query("SELECT * FROM money_table ORDER BY id ASC")
-    fun readExpenses(): LiveData<List<ExpenseEntity>>
+    @Query("SELECT * FROM expense_table ORDER BY id ASC")
+    suspend fun readExpenses(): List<ExpenseEntity>
 
     @Insert
     suspend fun insertExpenseEntity(expenseEntity: ExpenseEntity)

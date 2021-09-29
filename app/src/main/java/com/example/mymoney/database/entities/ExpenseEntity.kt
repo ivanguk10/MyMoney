@@ -5,12 +5,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.mymoney.models.MoneyModel
 import com.example.mymoney.util.Constants
+import com.example.mymoney.util.Constants.Companion.EXPENSE_TABLE
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
 
 @Parcelize
-@Entity(tableName = Constants.MONEY_TABLE)
+@Entity(tableName = EXPENSE_TABLE)
 data class ExpenseEntity(
 
     @PrimaryKey(autoGenerate = true)

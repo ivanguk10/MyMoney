@@ -4,8 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mymoney.database.DataStoreRepository
+import com.example.mymoney.database.entities.ExpenseEntity
 import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.models.ExpenseModel
+import com.example.mymoney.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,6 +21,7 @@ import kotlin.collections.ArrayList
 @HiltViewModel
 class SortViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository,
+    private val repository: Repository,
     application: Application
 ): AndroidViewModel(application) {
 
@@ -46,6 +49,7 @@ class SortViewModel @Inject constructor(
                 newList.add(it)
             }
         }
+
         return newList
     }
 

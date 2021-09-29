@@ -11,6 +11,7 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mymoney.R
+import com.example.mymoney.database.entities.ExpenseEntity
 import com.example.mymoney.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentBottomSheetBinding
 import com.example.mymoney.models.ExpenseModel
@@ -18,6 +19,8 @@ import com.example.mymoney.models.MoneyModel
 import com.example.mymoney.util.Constants.Companion.SUPERMARKET
 import com.example.mymoney.viewmodel.KeyboardViewModel
 import com.example.mymoney.viewmodel.MainViewModel
+import com.example.mymoney.viewmodel.SortViewModel
+import com.example.mymoney.viewmodel.StatisticsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -32,6 +35,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private val binding get() = _binding!!
     private val keyboardViewModel: KeyboardViewModel by viewModels()
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var statisticsViewModel: StatisticsViewModel
 
     private val args: BottomSheetFragmentArgs by navArgs()
 
@@ -40,6 +44,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        statisticsViewModel = ViewModelProvider(this).get(StatisticsViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -104,6 +109,15 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 moneyEntity.color
             )
         )
+        statisticsViewModel.insertExpense(
+            ExpenseEntity(
+                0,
+                binding.valueTextView.text.toString().toFloat(),
+                expenseType,
+                getDate()
+            )
+        )
+
         findNavController().navigate(R.id.action_bottomSheetFragment_to_homeFragment)
     }
 

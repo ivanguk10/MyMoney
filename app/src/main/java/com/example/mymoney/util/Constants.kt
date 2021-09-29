@@ -7,6 +7,7 @@ class Constants {
     companion object {
 
         const val MONEY_TABLE = "money_table"
+        const val EXPENSE_TABLE = "expense_table"
         const val DATABASE_NAME = "money_database"
 
         const val PREFERENCES_NAME = "money_preferences"

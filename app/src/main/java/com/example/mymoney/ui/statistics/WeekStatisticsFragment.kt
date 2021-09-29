@@ -48,6 +48,7 @@ class WeekStatisticsFragment : DialogFragment() {
 
         mainViewModel.readMoney.observe(viewLifecycleOwner, { cards ->
 
+            //сортировать по времени
             cards.forEach { card ->
                 val list = sortViewModel.sortWeek(card)
                 listOfExpenses.addAll(list)
