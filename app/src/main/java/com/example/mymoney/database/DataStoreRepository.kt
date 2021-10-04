@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.mymoney.util.Constants.Companion.PREFERENCES_CARD_ID
+import com.example.mymoney.util.Constants.Companion.PREFERENCES_MONTH_ID
 import com.example.mymoney.util.Constants.Companion.PREFERENCES_NAME
 import com.example.mymoney.util.Constants.Companion.PREFERENCES_SORT_ID
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -23,6 +24,8 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
     private object PreferencesKeys {
         val cardId = intPreferencesKey(PREFERENCES_CARD_ID)
         val sortId = intPreferencesKey(PREFERENCES_SORT_ID)
+
+        val monthId = intPreferencesKey(PREFERENCES_MONTH_ID)
     }
 
     private val dataStore: DataStore<Preferences> = context.dataStore
@@ -31,6 +34,12 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         dataStore.edit { preferences ->
             preferences[PreferencesKeys.cardId] = cardId
             preferences[PreferencesKeys.sortId] = sortId
+        }
+    }
+
+    suspend fun saveMonth(monthId: Int) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKeys.monthId] = monthId
         }
     }
 
@@ -50,9 +59,28 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
                 sortId
             )
         }
+
+    val readMonth: Flow<MonthValue> = dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }
+        .map { preferences ->
+            val monthId = preferences[PreferencesKeys.monthId] ?: 9
+            MonthValue(
+                monthId
+            )
+        }
 }
 
 data class SortCardType(
     val cardId: Int,
     val sortId: Int
+)
+
+data class MonthValue(
+    val monthId: Int
 )

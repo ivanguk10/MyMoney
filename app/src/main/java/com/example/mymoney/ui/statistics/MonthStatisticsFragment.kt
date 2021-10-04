@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import com.example.mymoney.R
 import com.example.mymoney.databinding.FragmentMonthStatisticsBinding
 import com.example.mymoney.viewmodel.SortViewModel
 import com.example.mymoney.viewmodel.StatisticsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -22,6 +24,7 @@ class MonthStatisticsFragment : Fragment() {
     private val binding get() = _binding!!
     private val statisticsViewModel: StatisticsViewModel by viewModels()
     private var totalExpense = 0f
+    private var month: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,14 +34,19 @@ class MonthStatisticsFragment : Fragment() {
         _binding = FragmentMonthStatisticsBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        lifecycleScope.launch {
-            val expenses = statisticsViewModel.getMonthExpenses()
-            statisticsViewModel.sortByTypeAndAmountMonth()
-            expenses.forEach {
-                totalExpense += it.amount
+        statisticsViewModel.readMonth.asLiveData().observe(viewLifecycleOwner, {
+            month = it.monthId
+            if (month != null) {
+                lifecycleScope.launch {
+                    statisticsViewModel.getMonthExpenses(month!!)
+                    statisticsViewModel.sortByTypeAndAmountMonth()
+                }
             }
+        })
 
-        }
+        statisticsViewModel.totalExpense.observe(viewLifecycleOwner, { total ->
+            binding.expenseValue.text = total.toString()
+        })
 
         statisticsViewModel.biggestExpenses.observe(viewLifecycleOwner, { values ->
             binding.expense1Value.text = values[0].toString()
@@ -64,6 +72,44 @@ class MonthStatisticsFragment : Fragment() {
             binding.category4.text = categories.elementAt(3)
             binding.category5.text = categories.elementAt(4)
         })
+
+        binding.january.setOnClickListener {
+            statisticsViewModel.saveMonth(1)
+        }
+        binding.february.setOnClickListener {
+            statisticsViewModel.saveMonth(2)
+        }
+        binding.march.setOnClickListener {
+            statisticsViewModel.saveMonth(3)
+        }
+        binding.april.setOnClickListener {
+            statisticsViewModel.saveMonth(4)
+        }
+        binding.may.setOnClickListener {
+            statisticsViewModel.saveMonth(5)
+        }
+        binding.june.setOnClickListener {
+            statisticsViewModel.saveMonth(6)
+        }
+        binding.july.setOnClickListener {
+            statisticsViewModel.saveMonth(7)
+        }
+        binding.august.setOnClickListener {
+            statisticsViewModel.saveMonth(8)
+        }
+        binding.september.setOnClickListener {
+            statisticsViewModel.saveMonth(9)
+        }
+        binding.october.setOnClickListener {
+            statisticsViewModel.saveMonth(10)
+        }
+        binding.november.setOnClickListener {
+            statisticsViewModel.saveMonth(11)
+        }
+        binding.december.setOnClickListener {
+            statisticsViewModel.saveMonth(12)
+        }
+
 
         return binding.root
     }

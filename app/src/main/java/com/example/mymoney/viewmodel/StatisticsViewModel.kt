@@ -1,11 +1,13 @@
 package com.example.mymoney.viewmodel
 
 import android.app.Application
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.mymoney.database.DataStoreRepository
 import com.example.mymoney.database.entities.ExpenseEntity
 import com.example.mymoney.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,13 +15,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.HashMap
 import javax.inject.Inject
+import kotlin.collections.HashMap
 
 @HiltViewModel
 class StatisticsViewModel @Inject constructor(
     application: Application,
     private val repository: Repository,
+    private val dataStoreRepository: DataStoreRepository
 ): AndroidViewModel(application) {
 
     private var _map: MutableLiveData<Map<String, Float>> = MutableLiveData()
@@ -41,7 +44,7 @@ class StatisticsViewModel @Inject constructor(
         get() = _monthExpenses
 
     private var _totalExpense: MutableLiveData<Float> = MutableLiveData()
-    private val totalExpense : LiveData<Float>
+    val totalExpense : LiveData<Float>
         get() = _totalExpense
 
     private var _diagramValues: MutableLiveData<ArrayList<Float>> = MutableLiveData(
@@ -50,6 +53,13 @@ class StatisticsViewModel @Inject constructor(
     val diagramValues: LiveData<ArrayList<Float>>
         get() = _diagramValues
 
+    val readMonth = dataStoreRepository.readMonth
+
+    fun saveMonth(monthId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataStoreRepository.saveMonth(monthId)
+        }
+    }
 
     private suspend fun getExpenses(): List<ExpenseEntity> {
         return repository.local.readExpenses()
@@ -61,9 +71,9 @@ class StatisticsViewModel @Inject constructor(
         }
     }
 
-    suspend fun getMonthExpenses(): ArrayList<ExpenseEntity> {
+    suspend fun getMonthExpenses(monthId: Int): ArrayList<ExpenseEntity> {
         val newList: ArrayList<ExpenseEntity> = arrayListOf()
-        val now = LocalDate.now()
+        val now = currentMonth(monthId)
         val start = now.withDayOfMonth(1)
         val end = now.withDayOfMonth(now.lengthOfMonth())
         val expenses = getExpenses()
@@ -75,7 +85,29 @@ class StatisticsViewModel @Inject constructor(
             }
         }
         _monthExpenses.value = newList
+        _biggestExpenses.value = arrayListOf(0f, 0f, 0f, 0f, 0f, 0f)
+        _totalExpense.value = 0f
         return newList
+    }
+
+    private fun currentMonth(monthId: Int): LocalDate {
+        val year = LocalDate.now().year
+        var now = LocalDate.now()
+        when (monthId) {
+            1 -> now = LocalDate.of(year, 1, 15)
+            2 -> now = LocalDate.of(year, 2, 15)
+            3 -> now = LocalDate.of(year, 3, 15)
+            4 -> now = LocalDate.of(year, 4, 15)
+            5 -> now = LocalDate.of(year, 5, 15)
+            6 -> now = LocalDate.of(year, 6, 15)
+            7 -> now = LocalDate.of(year, 7, 15)
+            8 -> now = LocalDate.of(year, 8, 15)
+            9 -> now = LocalDate.of(year, 9, 15)
+            10 -> now = LocalDate.of(year, 10, 15)
+            11 -> now = LocalDate.of(year, 11, 15)
+            12 -> now = LocalDate.of(year, 12, 15)
+        }
+        return now
     }
 
     fun sortByTypeAndAmountMonth() {
@@ -91,7 +123,7 @@ class StatisticsViewModel @Inject constructor(
             total += expense.amount
             _totalExpense.value = total
         }
-
+        Log.v("expense", _monthExpenses.value.toString())
         val sortedMap = hashMap.toList().sortedByDescending { (k, v) -> v }.toMap()
         _map.value = sortedMap
         getMostExpensiveValues()
@@ -111,6 +143,7 @@ class StatisticsViewModel @Inject constructor(
         }
 
         _diagramValues.value = percentValues
+        //_biggestExpenses.value = arrayListOf(0f, 0f, 0f, 0f, 0f, 0f)
     }
 
     private fun getMostExpensiveCategories() {

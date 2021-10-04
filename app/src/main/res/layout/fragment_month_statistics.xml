@@ -15,11 +15,11 @@
         tools:context=".ui.statistics.WeekStatisticsFragment">
 
         <TextView
-            android:id="@+id/weekStatTitle"
+            android:id="@+id/monthStatTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/week_statistics"
+            android:text="@string/month_statistics"
             android:textColor="@color/black"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,10 +32,156 @@
             android:layout_height="200dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/weekStatTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/monthStatTitle" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/january"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/white"
+            android:padding="0dp"
+            android:text="Jan"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/exp1Color"
+            app:layout_constraintTop_toBottomOf="@+id/pieChart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/february"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/white"
+            android:padding="0dp"
+            android:text="Feb"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/march"
+            app:layout_constraintStart_toEndOf="@+id/january"
+            app:layout_constraintTop_toBottomOf="@+id/pieChart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/march"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/white"
+            android:padding="0dp"
+            android:text="Mar"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/april"
+            app:layout_constraintStart_toEndOf="@+id/february"
+            app:layout_constraintTop_toBottomOf="@+id/pieChart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/april"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/white"
+            android:padding="0dp"
+            android:text="Apr"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/may"
+            app:layout_constraintStart_toEndOf="@+id/march"
+            app:layout_constraintTop_toBottomOf="@+id/pieChart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/may"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/white"
+            android:padding="0dp"
+            android:text="May"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/june"
+            app:layout_constraintStart_toEndOf="@+id/april"
+            app:layout_constraintTop_toBottomOf="@+id/pieChart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/june"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/white"
+            android:padding="0dp"
+            android:text="Jun"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/exp2Color"
+            app:layout_constraintTop_toBottomOf="@+id/pieChart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/july"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/white"
+            android:padding="0dp"
+            android:text="Jul"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/exp1Color"
+            app:layout_constraintTop_toBottomOf="@+id/january" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/august"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/white"
+            android:padding="0dp"
+            android:text="Aug"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/september"
+            app:layout_constraintStart_toEndOf="@+id/july"
+            app:layout_constraintTop_toBottomOf="@+id/january" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/september"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/white"
+            android:padding="0dp"
+            android:text="Sep"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/october"
+            app:layout_constraintStart_toEndOf="@+id/august"
+            app:layout_constraintTop_toBottomOf="@+id/january" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/october"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/white"
+            android:padding="0dp"
+            android:text="Oct"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/november"
+            app:layout_constraintStart_toEndOf="@+id/september"
+            app:layout_constraintTop_toBottomOf="@+id/january" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/november"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/white"
+            android:padding="0dp"
+            android:text="Nov"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/december"
+            app:layout_constraintStart_toEndOf="@+id/october"
+            app:layout_constraintTop_toBottomOf="@+id/january" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/december"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/white"
+            android:padding="0dp"
+            android:text="Dec"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/exp2Color"
+            app:layout_constraintTop_toBottomOf="@+id/january" />
 
         <TextView
-            android:id="@+id/incomeWeek"
+            android:id="@+id/incomeMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -43,12 +189,12 @@
             android:text="@string/income"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/expenseWeek"
+            app:layout_constraintEnd_toStartOf="@+id/expenseMonth"
             app:layout_constraintStart_toStartOf="@+id/pieChart"
-            app:layout_constraintTop_toBottomOf="@+id/pieChart" />
+            app:layout_constraintTop_toBottomOf="@+id/july" />
 
         <TextView
-            android:id="@+id/expenseWeek"
+            android:id="@+id/expenseMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -57,8 +203,8 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/pieChart"
-            app:layout_constraintStart_toEndOf="@+id/incomeWeek"
-            app:layout_constraintTop_toBottomOf="@+id/pieChart" />
+            app:layout_constraintStart_toEndOf="@+id/incomeMonth"
+            app:layout_constraintTop_toBottomOf="@+id/july" />
 
 
         <LinearLayout
@@ -67,9 +213,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@+id/incomeWeek"
-            app:layout_constraintStart_toStartOf="@+id/incomeWeek"
-            app:layout_constraintTop_toBottomOf="@+id/incomeWeek">
+            app:layout_constraintEnd_toEndOf="@+id/incomeMonth"
+            app:layout_constraintStart_toStartOf="@+id/incomeMonth"
+            app:layout_constraintTop_toBottomOf="@+id/incomeMonth">
 
             <TextView
                 android:id="@+id/incomeCurrency"
@@ -92,9 +238,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@+id/expenseWeek"
-            app:layout_constraintStart_toStartOf="@+id/expenseWeek"
-            app:layout_constraintTop_toBottomOf="@+id/expenseWeek">
+            app:layout_constraintEnd_toEndOf="@+id/expenseMonth"
+            app:layout_constraintStart_toStartOf="@+id/expenseMonth"
+            app:layout_constraintTop_toBottomOf="@+id/expenseMonth">
 
             <TextView
                 android:id="@+id/expenseCurrency"
@@ -115,7 +261,7 @@
             android:id="@+id/exp1Color"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/darkestPurple"
             app:layout_constraintStart_toStartOf="parent"
@@ -126,7 +272,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="24dp"
             android:backgroundTint="@color/purpleDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
@@ -135,7 +281,7 @@
             android:id="@+id/exp3Color"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/pastelBlue"
             app:layout_constraintStart_toStartOf="parent"
@@ -146,7 +292,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="24dp"
             android:backgroundTint="@color/pastelGreen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/exp2Color" />
@@ -155,7 +301,7 @@
             android:id="@+id/exp5Color"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/pastel"
             app:layout_constraintStart_toStartOf="parent"
@@ -321,7 +467,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="24dp"
             android:backgroundTint="@color/pastelOrange"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/exp4Color" />
