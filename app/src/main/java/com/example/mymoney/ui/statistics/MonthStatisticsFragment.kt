@@ -23,7 +23,6 @@ class MonthStatisticsFragment : Fragment() {
     private var _binding: FragmentMonthStatisticsBinding? = null
     private val binding get() = _binding!!
     private val statisticsViewModel: StatisticsViewModel by viewModels()
-    private var totalExpense = 0f
     private var month: Int? = null
 
     override fun onCreateView(
@@ -49,28 +48,34 @@ class MonthStatisticsFragment : Fragment() {
         })
 
         statisticsViewModel.biggestExpenses.observe(viewLifecycleOwner, { values ->
-            binding.expense1Value.text = values[0].toString()
-            binding.expense2Value.text = values[1].toString()
-            binding.expense3Value.text = values[2].toString()
-            binding.expense4Value.text = values[3].toString()
-            binding.expense5Value.text = values[4].toString()
-            binding.expense6Value.text = values[5].toString()
+            val expensesTv = arrayListOf(binding.expense1Value, binding.expense2Value,
+                binding.expense3Value, binding.expense4Value, binding.expense5Value,
+                binding.expense6Value
+            )
+
+            for (i in 0 until values.size) {
+                expensesTv[i].text = values[i].toString()
+            }
         })
         statisticsViewModel.diagramValues.observe(viewLifecycleOwner, { diagramValues ->
-            binding.pieChart.setExp1(diagramValues[0])
-            binding.pieChart.setExp2(diagramValues[1])
-            binding.pieChart.setExp3(diagramValues[2])
-            binding.pieChart.setExp4(diagramValues[3])
-            binding.pieChart.setExp5(diagramValues[4])
-            binding.pieChart.setExp6(diagramValues[5])
+
+            binding.pieChart.setExpenseValues(diagramValues)
         })
 
         statisticsViewModel.biggestCategories.observe(viewLifecycleOwner, { categories ->
-            binding.category1.text = categories.elementAt(0)
-            binding.category2.text = categories.elementAt(1)
-            binding.category3.text = categories.elementAt(2)
-            binding.category4.text = categories.elementAt(3)
-            binding.category5.text = categories.elementAt(4)
+            val categoriesTv = arrayListOf(binding.category1, binding.category2, binding.category3,
+                binding.category4, binding.category5
+            )
+
+            for (i in categories.indices) {
+                categoriesTv[i].text = categories.elementAt(i)
+            }
+
+//            categoriesTv[0].text = categories.elementAt(0)
+//            categoriesTv[1].text = categories.elementAt(1)
+//            categoriesTv[2].text = categories.elementAt(2)
+//            categoriesTv[3].text = categories.elementAt(3)
+//            categoriesTv[4].text = categories.elementAt(4)
         })
 
         binding.january.setOnClickListener {

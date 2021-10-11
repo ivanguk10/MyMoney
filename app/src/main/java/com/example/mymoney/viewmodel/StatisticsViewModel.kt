@@ -30,7 +30,7 @@ class StatisticsViewModel @Inject constructor(
         get() = _map
 
     private var _biggestExpenses: MutableLiveData<ArrayList<Float>> = MutableLiveData(
-        arrayListOf(0f, 0f, 0f, 0f, 0f, 0f)
+        arrayListOf()
     )
     val biggestExpenses: LiveData<ArrayList<Float>>
         get() = _biggestExpenses
@@ -48,7 +48,7 @@ class StatisticsViewModel @Inject constructor(
         get() = _totalExpense
 
     private var _diagramValues: MutableLiveData<ArrayList<Float>> = MutableLiveData(
-        arrayListOf(0f, 0f, 0f, 0f, 0f, 0f)
+        arrayListOf()
     )
     val diagramValues: LiveData<ArrayList<Float>>
         get() = _diagramValues
@@ -85,7 +85,7 @@ class StatisticsViewModel @Inject constructor(
             }
         }
         _monthExpenses.value = newList
-        _biggestExpenses.value = arrayListOf(0f, 0f, 0f, 0f, 0f, 0f)
+        _biggestExpenses.value = arrayListOf()
         _totalExpense.value = 0f
         return newList
     }
@@ -133,38 +133,51 @@ class StatisticsViewModel @Inject constructor(
 
     private fun valueToDiagramValue() {
 
-        val percentValues = arrayListOf(0f, 0f, 0f, 0f, 0f, 0f)
+        val percentValues = _biggestExpenses.value!!
         val values = _biggestExpenses.value
         val total = _totalExpense.value
         if (values != null && total != null) {
-            for (i in 0..5) {
+            for (i in 0 until values.size) {
                 percentValues[i] = (values[i] * 360)/total
             }
         }
 
         _diagramValues.value = percentValues
-        //_biggestExpenses.value = arrayListOf(0f, 0f, 0f, 0f, 0f, 0f)
     }
 
     private fun getMostExpensiveCategories() {
-
-        _biggestCategories.value = _map.value?.keys?.toList()?.slice(0..4)
+        if (_map.value!!.size >= 6) {
+            _biggestCategories.value = _map.value?.keys?.toList()?.slice(0..4)
+        }
+        else {
+            val size = _map.value!!.keys.size
+            _biggestCategories.value = _map.value?.keys?.toList()?.slice(0 until size)
+        }
     }
 
     private fun getMostExpensiveValues() {
-        val values = _biggestExpenses.value
-        if (_map.value != null) {
-            for (i in 0..4) {
-                values!![i] = _map.value!!.values.elementAt(i)
+        Log.i("TAG", _map.value.toString())
+        if (_map.value!!.size >= 6 ) {
+            val values = arrayListOf(0f, 0f, 0f, 0f, 0f, 0f,)
+            if (_map.value != null) {
+                for (i in 0..4) {
+                    values[i] = _map.value!!.values.elementAt(i)
+                }
             }
-        }
-        if (_map.value != null) {
-            for (i in 5 until _map.value!!.values.size) {
-                values!![5] += _map.value!!.values.elementAt(i)
+            if (_map.value != null) {
+                for (i in 5 until _map.value!!.values.size) {
+                    values[5] += _map.value!!.values.elementAt(i)
+                }
             }
+            _biggestExpenses.value = values
         }
-        _biggestExpenses.value = values
-
+        else {
+            val values = arrayListOf<Float>()
+            _map.value!!.values.forEach {
+                values.add(it)
+            }
+            _biggestExpenses.value = values
+        }
     }
 
     private fun stringToLocaleDate(dateString: String): LocalDate {

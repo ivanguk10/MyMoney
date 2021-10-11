@@ -69,7 +69,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             }
         }
         .map { preferences ->
-            val monthId = preferences[PreferencesKeys.monthId] ?: 9
+            val monthId = preferences[PreferencesKeys.monthId] ?: 10
             MonthValue(
                 monthId
             )

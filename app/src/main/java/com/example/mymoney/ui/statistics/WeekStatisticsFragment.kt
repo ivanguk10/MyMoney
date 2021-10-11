@@ -64,12 +64,12 @@ class WeekStatisticsFragment : DialogFragment() {
             val categories = sortViewModel.getMostExpensiveCategories(sortedMap)
             val diagramValues = sortViewModel.valueToDiagramValue(values, totalExpense)
 
-            binding.pieChart.setExp1(diagramValues[0])
-            binding.pieChart.setExp2(diagramValues[1])
-            binding.pieChart.setExp3(diagramValues[2])
-            binding.pieChart.setExp4(diagramValues[3])
-            binding.pieChart.setExp5(diagramValues[4])
-            binding.pieChart.setExp6(diagramValues[5])
+//            binding.pieChart.setExp1(diagramValues[0])
+//            binding.pieChart.setExp2(diagramValues[1])
+//            binding.pieChart.setExp3(diagramValues[2])
+//            binding.pieChart.setExp4(diagramValues[3])
+//            binding.pieChart.setExp5(diagramValues[4])
+//            binding.pieChart.setExp6(diagramValues[5])
 
 
             binding.category1.text = categories.elementAt(0)

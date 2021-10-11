@@ -372,7 +372,7 @@
                 android:id="@+id/expense1Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1000" />
+                android:text="" />
         </LinearLayout>
 
 
@@ -395,7 +395,7 @@
                 android:id="@+id/expense2Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1000" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -416,7 +416,7 @@
                 android:id="@+id/expense3Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1000" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -438,7 +438,7 @@
                 android:id="@+id/expense4Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1000" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -459,7 +459,7 @@
                 android:id="@+id/expense5Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1000" />
+                android:text="" />
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
@@ -500,7 +500,7 @@
                 android:id="@+id/expense6Value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1000" />
+                android:text="" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
