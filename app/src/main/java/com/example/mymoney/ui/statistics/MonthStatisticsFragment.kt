@@ -36,10 +36,7 @@ class MonthStatisticsFragment : Fragment() {
         statisticsViewModel.readMonth.asLiveData().observe(viewLifecycleOwner, {
             month = it.monthId
             if (month != null) {
-                lifecycleScope.launch {
-                    statisticsViewModel.getMonthExpenses(month!!)
-                    statisticsViewModel.sortByTypeAndAmountMonth()
-                }
+                statisticsViewModel.getMonthExpenses(month!!)
             }
         })
 

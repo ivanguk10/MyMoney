@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.example.mymoney.R
 import com.example.mymoney.databinding.FragmentYearStatisticsBinding
-import com.example.mymoney.viewmodel.YearStatisticsViewModel
+import com.example.mymoney.viewmodel.StatisticsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,7 +15,7 @@ class YearStatisticsFragment : Fragment() {
 
     private var _binding: FragmentYearStatisticsBinding? = null
     private val binding get() = _binding!!
-    private val yearStatisticsViewModel: YearStatisticsViewModel by viewModels()
+    private val statisticsViewModel: StatisticsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,13 +25,13 @@ class YearStatisticsFragment : Fragment() {
         _binding = FragmentYearStatisticsBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        yearStatisticsViewModel.getYearExpenses()
+        statisticsViewModel.getYearExpenses()
 
-        yearStatisticsViewModel.totalExpense.observe(viewLifecycleOwner, { total ->
+        statisticsViewModel.totalExpense.observe(viewLifecycleOwner, { total ->
             binding.expenseValue.text = total.toString()
         })
 
-        yearStatisticsViewModel.biggestExpenses.observe(viewLifecycleOwner, { values ->
+        statisticsViewModel.biggestExpenses.observe(viewLifecycleOwner, { values ->
             val expensesTv = arrayListOf(binding.expense1Value, binding.expense2Value,
                 binding.expense3Value, binding.expense4Value, binding.expense5Value,
                 binding.expense6Value
@@ -42,12 +41,12 @@ class YearStatisticsFragment : Fragment() {
                 expensesTv[i].text = values[i].toString()
             }
         })
-        yearStatisticsViewModel.diagramValues.observe(viewLifecycleOwner, { diagramValues ->
+        statisticsViewModel.diagramValues.observe(viewLifecycleOwner, { diagramValues ->
 
             binding.pieChart.setExpenseValues(diagramValues)
         })
 
-        yearStatisticsViewModel.biggestCategories.observe(viewLifecycleOwner, { categories ->
+        statisticsViewModel.biggestCategories.observe(viewLifecycleOwner, { categories ->
             val categoriesTv = arrayListOf(binding.category1, binding.category2, binding.category3,
                 binding.category4, binding.category5
             )

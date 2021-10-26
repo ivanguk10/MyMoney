@@ -2,7 +2,6 @@ package com.example.mymoney.viewmodel
 
 import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,6 +12,7 @@ import com.example.mymoney.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
@@ -25,9 +25,6 @@ class StatisticsViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository
 ): AndroidViewModel(application) {
 
-    private var _map: MutableLiveData<Map<String, Float>> = MutableLiveData()
-    val map: LiveData<Map<String, Float>>
-        get() = _map
 
     private var _biggestExpenses: MutableLiveData<ArrayList<Float>> = MutableLiveData(
         arrayListOf()
@@ -38,10 +35,6 @@ class StatisticsViewModel @Inject constructor(
     private var _biggestCategories: MutableLiveData<List<String>> = MutableLiveData()
     val biggestCategories: LiveData<List<String>>
         get() = _biggestCategories
-
-    private var _monthExpenses: MutableLiveData<ArrayList<ExpenseEntity>> = MutableLiveData()
-    val monthExpenses: LiveData<ArrayList<ExpenseEntity>>
-        get() = _monthExpenses
 
     private var _totalExpense: MutableLiveData<Float> = MutableLiveData()
     val totalExpense : LiveData<Float>
@@ -71,23 +64,114 @@ class StatisticsViewModel @Inject constructor(
         }
     }
 
-    suspend fun getMonthExpenses(monthId: Int): ArrayList<ExpenseEntity> {
+    fun getMonthExpenses(monthId: Int) {
         val newList: ArrayList<ExpenseEntity> = arrayListOf()
         val now = currentMonth(monthId)
         val start = now.withDayOfMonth(1)
         val end = now.withDayOfMonth(now.lengthOfMonth())
-        val expenses = getExpenses()
 
-        expenses.forEach {
-            val date = stringToLocaleDate(it.date)
-            if (date == start || date == end || date.isAfter(start) && date.isBefore(end)) {
-                newList.add(it)
+        viewModelScope.launch(Dispatchers.IO) {
+            val expenses = getExpenses()
+
+            withContext(Dispatchers.Default) {
+                expenses.forEach {
+                    val date = stringToLocaleDate(it.date)
+                    if (date == start || date == end || date.isAfter(start) && date.isBefore(end)) {
+                        newList.add(it)
+                    }
+                }
+                sortByTypeAndAmount(newList)
             }
         }
-        _monthExpenses.value = newList
-        _biggestExpenses.value = arrayListOf()
-        _totalExpense.value = 0f
-        return newList
+    }
+
+    fun getYearExpenses() {
+        val newList: ArrayList<ExpenseEntity> = arrayListOf()
+        val now = LocalDate.now()
+        val start = now.withDayOfYear(1)
+        val end = now.withDayOfYear(now.lengthOfYear())
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val expenses = getExpenses()
+
+            withContext(Dispatchers.Default) {
+                expenses.forEach {
+                    val date = stringToLocaleDate(it.date)
+                    if (date == start || date == end || date.isAfter(start) && date.isBefore(end)) {
+                        newList.add(it)
+                    }
+                }
+                sortByTypeAndAmount(newList)
+            }
+        }
+    }
+
+    private fun sortByTypeAndAmount(expenses: ArrayList<ExpenseEntity>) {
+        val hashMap = HashMap<String, Float>()
+
+        expenses.forEach { expense ->
+            if (hashMap.containsKey(expense.type)) {
+                val amount = hashMap[expense.type]
+                hashMap[expense.type] = expense.amount + amount!!
+            } else{
+                hashMap[expense.type] = expense.amount
+            }
+        }
+        Log.i("expense", expenses.toString())
+        val sortedMap = hashMap.toList().sortedByDescending { (k, v) -> v }.toMap()
+        getMostExpensiveValues(sortedMap)
+        getMostExpensiveCategories(sortedMap)
+    }
+
+    private fun getMostExpensiveValues(map: Map<String, Float>) {
+        Log.i("TAG", map.toString())
+        val biggestExpenses: ArrayList<Float>
+        if (map.size >= 6 ) {
+            val values = arrayListOf(0f, 0f, 0f, 0f, 0f, 0f,)
+
+            for (i in 0..4) {
+                values[i] = map.values.elementAt(i)
+            }
+            for (i in 5 until map.values.size) {
+                values[5] += map.values.elementAt(i)
+            }
+            biggestExpenses = values
+        }
+        else {
+            val values = arrayListOf<Float>()
+            map.values.forEach {
+                values.add(it)
+            }
+            biggestExpenses = values
+        }
+        val total = biggestExpenses.sum()
+        valueToDiagramValue(biggestExpenses, total)
+        _biggestExpenses.postValue(biggestExpenses)
+        _totalExpense.postValue(total)
+        Log.i("biggestExpenses", biggestExpenses.toString())
+    }
+
+    private fun valueToDiagramValue(biggestExpenses: ArrayList<Float>, total: Float) {
+
+        val percentValues = arrayListOf(0f, 0f, 0f, 0f, 0f, 0f,)
+        for (i in 0 until biggestExpenses.size) {
+            percentValues[i] = (biggestExpenses[i] * 360)/total
+        }
+        _diagramValues.postValue(percentValues)
+    }
+
+    private fun getMostExpensiveCategories(map: Map<String, Float>) {
+        val biggestCategories: List<String>
+        if (map.size >= 6) {
+            biggestCategories = map.keys.toList().slice(0..4)
+        }
+        else {
+            val size = map.keys.size
+            biggestCategories = map.keys.toList().slice(0 until size)
+
+        }
+        _biggestCategories.postValue(biggestCategories)
+        Log.i("biggestCategories", biggestCategories.toString())
     }
 
     private fun currentMonth(monthId: Int): LocalDate {
@@ -110,75 +194,6 @@ class StatisticsViewModel @Inject constructor(
         return now
     }
 
-    fun sortByTypeAndAmountMonth() {
-        val hashMap = HashMap<String, Float>()
-        var total = 0f
-        _monthExpenses.value?.forEach { expense ->
-            if (hashMap.containsKey(expense.type)) {
-                val amount = hashMap[expense.type]
-                hashMap[expense.type] = expense.amount + amount!!
-            } else{
-                hashMap[expense.type] = expense.amount
-            }
-            total += expense.amount
-            _totalExpense.value = total
-        }
-        Log.v("expense", _monthExpenses.value.toString())
-        val sortedMap = hashMap.toList().sortedByDescending { (k, v) -> v }.toMap()
-        _map.value = sortedMap
-        getMostExpensiveValues()
-        valueToDiagramValue()
-        getMostExpensiveCategories()
-    }
-
-    private fun valueToDiagramValue() {
-
-        val percentValues = _biggestExpenses.value!!
-        val values = _biggestExpenses.value
-        val total = _totalExpense.value
-        if (values != null && total != null) {
-            for (i in 0 until values.size) {
-                percentValues[i] = (values[i] * 360)/total
-            }
-        }
-
-        _diagramValues.value = percentValues
-    }
-
-    private fun getMostExpensiveCategories() {
-        if (_map.value!!.size >= 6) {
-            _biggestCategories.value = _map.value?.keys?.toList()?.slice(0..4)
-        }
-        else {
-            val size = _map.value!!.keys.size
-            _biggestCategories.value = _map.value?.keys?.toList()?.slice(0 until size)
-        }
-    }
-
-    private fun getMostExpensiveValues() {
-        Log.i("TAG", _map.value.toString())
-        if (_map.value!!.size >= 6 ) {
-            val values = arrayListOf(0f, 0f, 0f, 0f, 0f, 0f,)
-            if (_map.value != null) {
-                for (i in 0..4) {
-                    values[i] = _map.value!!.values.elementAt(i)
-                }
-            }
-            if (_map.value != null) {
-                for (i in 5 until _map.value!!.values.size) {
-                    values[5] += _map.value!!.values.elementAt(i)
-                }
-            }
-            _biggestExpenses.value = values
-        }
-        else {
-            val values = arrayListOf<Float>()
-            _map.value!!.values.forEach {
-                values.add(it)
-            }
-            _biggestExpenses.value = values
-        }
-    }
 
     private fun stringToLocaleDate(dateString: String): LocalDate {
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
