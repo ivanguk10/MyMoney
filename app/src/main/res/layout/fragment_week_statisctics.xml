@@ -16,7 +16,7 @@
         tools:context=".ui.statistics.WeekStatisticsFragment">
 
         <TextView
-            android:id="@+id/monthStatTitle"
+            android:id="@+id/yearStatTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -33,10 +33,10 @@
             android:layout_height="200dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/monthStatTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/yearStatTitle" />
 
         <TextView
-            android:id="@+id/incomeMonth"
+            android:id="@+id/incomeYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -44,12 +44,12 @@
             android:text="@string/income"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/expenseMonth"
+            app:layout_constraintEnd_toStartOf="@+id/expenseYear"
             app:layout_constraintStart_toStartOf="@+id/pieChart"
             app:layout_constraintTop_toBottomOf="@+id/pieChart" />
 
         <TextView
-            android:id="@+id/expenseMonth"
+            android:id="@+id/expenseYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -58,7 +58,7 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/pieChart"
-            app:layout_constraintStart_toEndOf="@+id/incomeMonth"
+            app:layout_constraintStart_toEndOf="@+id/incomeYear"
             app:layout_constraintTop_toBottomOf="@+id/pieChart" />
 
 
@@ -68,9 +68,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@+id/incomeMonth"
-            app:layout_constraintStart_toStartOf="@+id/incomeMonth"
-            app:layout_constraintTop_toBottomOf="@+id/incomeMonth">
+            app:layout_constraintEnd_toEndOf="@+id/incomeYear"
+            app:layout_constraintStart_toStartOf="@+id/incomeYear"
+            app:layout_constraintTop_toBottomOf="@+id/incomeYear">
 
             <TextView
                 android:id="@+id/incomeCurrency"
@@ -93,9 +93,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@+id/expenseMonth"
-            app:layout_constraintStart_toStartOf="@+id/expenseMonth"
-            app:layout_constraintTop_toBottomOf="@+id/expenseMonth">
+            app:layout_constraintEnd_toEndOf="@+id/expenseYear"
+            app:layout_constraintStart_toStartOf="@+id/expenseYear"
+            app:layout_constraintTop_toBottomOf="@+id/expenseYear">
 
             <TextView
                 android:id="@+id/expenseCurrency"

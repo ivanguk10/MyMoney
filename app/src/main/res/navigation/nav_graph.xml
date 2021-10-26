@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_homeFragment_to_monthStatisticsFragment"
             app:destination="@id/monthStatisticsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_yearStatisticsFragment"
+            app:destination="@id/yearStatisticsFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -135,6 +138,14 @@
         tools:layout="@layout/fragment_month_statistics" >
         <action
             android:id="@+id/action_monthStatisticsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/yearStatisticsFragment"
+        android:name="com.example.mymoney.ui.statistics.YearStatisticsFragment"
+        android:label="YearStatisticsFragment" >
+        <action
+            android:id="@+id/action_yearStatisticsFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

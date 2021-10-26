@@ -71,11 +71,6 @@ class MonthStatisticsFragment : Fragment() {
                 categoriesTv[i].text = categories.elementAt(i)
             }
 
-//            categoriesTv[0].text = categories.elementAt(0)
-//            categoriesTv[1].text = categories.elementAt(1)
-//            categoriesTv[2].text = categories.elementAt(2)
-//            categoriesTv[3].text = categories.elementAt(3)
-//            categoriesTv[4].text = categories.elementAt(4)
         })
 
         binding.january.setOnClickListener {
