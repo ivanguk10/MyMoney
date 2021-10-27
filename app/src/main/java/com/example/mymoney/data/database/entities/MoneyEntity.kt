@@ -1,4 +1,4 @@
-package com.example.mymoney.database.entities
+package com.example.mymoney.data.database.entities
 
 import android.graphics.Color
 import android.os.Parcelable

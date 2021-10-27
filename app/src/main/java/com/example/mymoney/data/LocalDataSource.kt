@@ -1,9 +1,9 @@
-package com.example.mymoney.database
+package com.example.mymoney.data
 
 import androidx.lifecycle.LiveData
-import com.example.mymoney.database.entities.ExpenseEntity
-import com.example.mymoney.database.entities.MoneyEntity
-import kotlinx.coroutines.flow.Flow
+import com.example.mymoney.data.database.MoneyDao
+import com.example.mymoney.data.database.entities.ExpenseEntity
+import com.example.mymoney.data.database.entities.MoneyEntity
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(

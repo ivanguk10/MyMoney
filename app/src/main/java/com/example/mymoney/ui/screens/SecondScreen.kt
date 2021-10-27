@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.mymoney.R
-import com.example.mymoney.database.entities.MoneyEntity
+import com.example.mymoney.data.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentFirstScreenBinding
 import com.example.mymoney.databinding.FragmentSecondScreenBinding
 import com.example.mymoney.models.ExpenseModel

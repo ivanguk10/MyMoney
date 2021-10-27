@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymoney.OnCardViewClickListener
 import com.example.mymoney.adapters.CardAdapter
 import com.example.mymoney.R
-import com.example.mymoney.database.entities.MoneyEntity
+import com.example.mymoney.data.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentHomeBinding
 import com.example.mymoney.viewmodel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView

@@ -14,7 +14,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.mymoney.R
-import com.example.mymoney.database.entities.MoneyEntity
+import com.example.mymoney.data.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentAddNewCardBinding
 import com.example.mymoney.models.ExpenseModel
 import com.example.mymoney.models.IncomeModel

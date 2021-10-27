@@ -1,4 +1,4 @@
-package com.example.mymoney.database
+package com.example.mymoney.data.database
 
 import androidx.room.TypeConverter
 import com.example.mymoney.models.ExpenseModel

@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mymoney.R
-import com.example.mymoney.database.entities.MoneyEntity
+import com.example.mymoney.data.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentBottomSheetIncomeBinding
 import com.example.mymoney.models.IncomeModel
 import com.example.mymoney.models.MoneyModel
@@ -86,13 +86,15 @@ class BottomSheetIncomeFragment : BottomSheetDialogFragment() {
             incomeList,
             moneyEntity.money.expenses
         )
-        mainViewModel.updateMoneyEntity(MoneyEntity(
+        mainViewModel.updateMoneyEntity(
+            MoneyEntity(
             moneyEntity.id,
             moneyEntity.name,
             moneyAmount,
             moneyModel,
             moneyEntity.color
-        ))
+        )
+        )
         findNavController().navigate(R.id.action_bottomSheetIncomeFragment_to_homeFragment)
     }
 

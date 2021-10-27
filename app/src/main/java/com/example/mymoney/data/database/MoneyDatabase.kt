@@ -1,10 +1,10 @@
-package com.example.mymoney.database
+package com.example.mymoney.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.mymoney.database.entities.ExpenseEntity
-import com.example.mymoney.database.entities.MoneyEntity
+import com.example.mymoney.data.database.entities.ExpenseEntity
+import com.example.mymoney.data.database.entities.MoneyEntity
 
 
 @Database(

@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.mymoney.R
 import com.example.mymoney.adapters.MoneyAdapter
-import com.example.mymoney.database.entities.MoneyEntity
+import com.example.mymoney.data.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentHistoryBinding
 import com.example.mymoney.models.ExpenseModel
 import com.example.mymoney.util.Constants.Companion.THIS_MONTH

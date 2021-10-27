@@ -11,8 +11,8 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mymoney.R
-import com.example.mymoney.database.entities.ExpenseEntity
-import com.example.mymoney.database.entities.MoneyEntity
+import com.example.mymoney.data.database.entities.ExpenseEntity
+import com.example.mymoney.data.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentBottomSheetBinding
 import com.example.mymoney.models.ExpenseModel
 import com.example.mymoney.models.MoneyModel

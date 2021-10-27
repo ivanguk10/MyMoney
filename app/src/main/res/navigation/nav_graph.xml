@@ -65,7 +65,7 @@
             app:destination="@id/homeFragment" />
         <argument
             android:name="moneyEntity"
-            app:argType="com.example.mymoney.database.entities.MoneyEntity" />
+            app:argType="com.example.mymoney.data.database.entities.MoneyEntity" />
     </dialog>
     <dialog
         android:id="@+id/bottomSheetIncomeFragment"
@@ -77,7 +77,7 @@
             app:destination="@id/homeFragment" />
         <argument
             android:name="moneyEntity"
-            app:argType="com.example.mymoney.database.entities.MoneyEntity" />
+            app:argType="com.example.mymoney.data.database.entities.MoneyEntity" />
     </dialog>
     <fragment
         android:id="@+id/splashFragment"

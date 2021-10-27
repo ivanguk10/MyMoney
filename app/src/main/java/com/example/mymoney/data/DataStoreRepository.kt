@@ -1,4 +1,4 @@
-package com.example.mymoney.database
+package com.example.mymoney.data
 
 import android.content.Context
 import androidx.datastore.core.DataStore

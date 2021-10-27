@@ -3,9 +3,8 @@ package com.example.mymoney.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mymoney.database.DataStoreRepository
-import com.example.mymoney.database.entities.ExpenseEntity
-import com.example.mymoney.database.entities.MoneyEntity
+import com.example.mymoney.data.DataStoreRepository
+import com.example.mymoney.data.database.entities.MoneyEntity
 import com.example.mymoney.models.ExpenseModel
 import com.example.mymoney.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel

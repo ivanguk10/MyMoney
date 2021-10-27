@@ -6,8 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.mymoney.database.DataStoreRepository
-import com.example.mymoney.database.entities.ExpenseEntity
+import com.example.mymoney.data.DataStoreRepository
+import com.example.mymoney.data.database.entities.ExpenseEntity
 import com.example.mymoney.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

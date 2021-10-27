@@ -1,4 +1,4 @@
-package com.example.mymoney.database.entities
+package com.example.mymoney.data.database.entities
 
 import android.os.Parcelable
 import androidx.room.Entity

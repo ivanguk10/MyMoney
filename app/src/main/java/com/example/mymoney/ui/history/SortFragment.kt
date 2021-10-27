@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.mymoney.R
-import com.example.mymoney.database.entities.MoneyEntity
+import com.example.mymoney.data.database.entities.MoneyEntity
 import com.example.mymoney.databinding.FragmentSortBinding
 import com.example.mymoney.viewmodel.MainViewModel
 import com.example.mymoney.viewmodel.SortViewModel

@@ -8,7 +8,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymoney.OnCardViewClickListener
 import com.example.mymoney.R
-import com.example.mymoney.database.entities.MoneyEntity
+import com.example.mymoney.data.database.entities.MoneyEntity
 import com.example.mymoney.databinding.CardRowLayoutBinding
 import com.example.mymoney.ui.home.HomeFragmentDirections
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -70,7 +70,7 @@ class CardAdapter(
                 cardViewHolders.first().binding.moneyCard.invalidate()
                 cardViewHolders.clear()
                 cardViewHolders.add(holder)
-                id = position
+                id = holder.absoluteAdapterPosition
                 strokeWidth(holder, R.dimen.strokeWidthChecked)
                 mActionMode.title = holder.binding.moneyName.text.toString()
                 holder.binding.moneyCard.invalidate()
@@ -79,7 +79,7 @@ class CardAdapter(
                 strokeWidth(holder, R.dimen.strokeWidthChecked)
                 showBtns(true)
                 cardViewHolders.add(holder)
-                id = position
+                id = holder.absoluteAdapterPosition
                 requireActivity.startActionMode(this)
                 mActionMode.title = holder.binding.moneyName.text.toString()
             }
